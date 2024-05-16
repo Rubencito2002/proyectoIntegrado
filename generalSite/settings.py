@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-$ql%j*w75gu(lk6*$7x$@y9ysye*(q9=hnsy6b1t@y^je!9=sf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = "almacenApp.Empleados"
 
