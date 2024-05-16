@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} Eliminar Categoria {% endblock %}
+{% block content %}
+    <h1>Eliminar categoria</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>¿Quieres eliminar esta categoria "{{object}}"?</p>
+        {{ form }}
+        <button type="submit" value="Confirm" class="btn btn-personalizado color-text">Categoria Eliminado</button>
+    </form>
+    <a href="{% url 'listadoMarcaYCategoria' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-left-circle"> Volver</i></a>
+{% endblock %}

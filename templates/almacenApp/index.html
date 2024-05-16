@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Sistema de Almacenamiento {% endblock %}
+{% block content %}
+	<div class="container-fluids">
+		<div class="row">
+			<div class="col">
+				<h3 class="text-center text-decoration-underline">Gestión del Almacen</h3>
+				<div class="grid gap-3 justify-content-center">
+					<div class="p-2 g-col-6 text-center">
+						<a href="{% url 'listado_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-bag"> Gestor de Productos</i></a>
+						<a href="{% url 'listProductsPeds' %}" class="btn btn-personalizado color-text"><i class="bi bi-box-seam"> Gestor de Pedidos</i></a>
+					</div>
+					<div class="p-2 g-col-6 text-center">
+						<a href="{% url 'listadoMarcaYCategoria' %}" class="btn btn-personalizado color-text"><i class="bi bi-file-person"> Listado de Marca Y Categoria</i></a>
+						<a href="{% url 'listProveedor' %}" class="btn btn-personalizado color-text"><i class="bi bi-file-person"> Listado de Proveedores</i></a>
+					</div>
+					<div class="p-2 g-col-6 text-center">
+						<a href="{% url 'informes' %}" class="btn btn-personalizado color-text"><i class="bi bi-bookmark"> Informes</i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

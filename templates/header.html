@@ -1,0 +1,62 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-body-personalizado shadow p-0 mb-5"> <!-- tertiary -->
+    <div class="container">
+        <a class="navbar-brand color-text" href="/"><img src="{% static 'img/logo.png' %}" alt="" id="logo"> Hnos. Machado</a>
+        <!-- <a class="navbar-brand" href="/">Hnos. Machado</a> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="">
+                    <a class="nav-link color-text" href="{% url 'listSuperMarket' %}">Supermercado</a>
+                </li>
+                <li class="">
+                    <a class="nav-link color-text" href="{% url 'listInformatica' %}">Informática</a>
+                </li>
+                <li class="">
+                    <a class="nav-link color-text" href="{% url 'listModa' %}">Moda</a>
+                </li>
+            </ul>
+
+            <div class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#carrito-modal">
+                    <i id="iconCarrito" class="bi bi-cart" ></i> <!--style="font-size: 2rem;" -->
+                    <span id="contProducts" class="badge bg-danger">0</span>
+                </a>
+            </div>
+
+            <div class="modal fade" id="carrito-modal" tabindex="-1" aria-labelledby="carrito-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered"><!-- modal-dialog-centered -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="carrito-modal-label">Carrito de compras</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul id="carrito-list" class="list-group"></ul>
+                            <p>Total: <span id="total"></span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-personalizado color-text" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" id="btnComprar" class="btn btn-personalizado color-text">Tramitar compra</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <span class="navbar-text ms-5">
+                <div class="nav-item dropdown">
+                    <button class="btn btn-personalizado color-text dropdown-toggle shadow" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"> {{ user.username }}</i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <div><a class="dropdown-item " href="{% url 'almacen' %}">Panel Almacen</a></div>
+                        <div><a class="dropdown-item" href="{% url 'admin:index' %}">Panel de Admin</a></div>
+                        <div><a class="dropdown-item" href="#">Perfil</a></div>
+                    </ul>
+                </div>
+            </span>
+        </div>
+    </div>
+</nav>

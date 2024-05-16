@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %} {{ producto.nombre }} {% endblock %}
+{% block content %}
+    <div class="container">
+        <a href="{% url 'listProducts' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-left-circle"> Volver</i></a>
+        <h1 class=" text-decoration-underline">{{ producto.nombre }}</h1> <!--text-center-->
+        <div class="row">
+            <div class="col col-md-8">
+                {% if producto.muestra %}
+                    <img src="{{ producto.muestra.url }}" alt="">
+                {% endif %}
+            </div>
+            <div class="col col-lg-4 d-flex  ">
+                <span class="m-3"> {{ producto.precio }} €</span>
+                <div>
+                    <button class="addCart btn btn-personalizado color-text mr-2" data-name="{{ producto.nombre }}" data-price="{{ producto.precio }}">Añadir</button>
+                    <button class="btn btn-personalizado color-text">Favorito</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Características</h5>
+                <p>{{ producto.descripcion }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Valoraciones:</h5>
+                <a href="{% url 'agregarValoracion' pk=producto.pk %}" class="btn btn-personalizado color-text"> Añadir Valoracion</a>
+                <br><br>
+                {% for coment in valoraciones %}
+                    <article>
+                        <div class="user-info">
+                            <div class="avatar-container">
+                                <img class="avatar" src="{{ coment.usuario.userprofile.avatar.url }}" alt="Avatar">
+                            </div>
+                            <p>{{ coment.usuario.username}}</p>
+                        </div>
+                        {% if coment.valoracion == 1 %}
+                            <span class="star">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                        {% elif coment.valoracion == 2 %}
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                        {% elif coment.valoracion == 3 %}
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                        {% elif coment.valoracion == 4 %}
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                        {% elif coment.valoracion == 5 %}
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        {% else %}
+                        <span class="star-blanco">&#9733;</span>
+                        <span class="star-blanco">&#9733;</span>
+                        <span class="star-blanco">&#9733;</span>
+                        <span class="star-blanco">&#9733;</span>
+                        <span class="star-blanco">&#9733;</span>
+                        {% endif %}
+                        <h6>Comentario:</h6>
+                        <p>{{ coment.comentario }}</p>
+                    </article>
+                {% endfor %}
+                <!-- <p>{{ producto.descripcion }}</p> -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

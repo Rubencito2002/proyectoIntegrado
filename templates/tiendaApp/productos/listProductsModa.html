@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %} Moda {% endblock %}
+{% block content %}
+	<button class="btn btn-personalizado color-text mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtroPanel" aria-controls="filtroPanel">
+		<i class="bi bi-filter"></i> Filtrado
+	</button>
+
+	<div class="container-fluid offcanvas-content">
+		<div class="row">
+			<div class="col-12">
+				<!-- Panel Central con el listado de productos -->
+				<div class="row row-cols-1 row-cols-md-5 g-2">
+					{% for prods in productos %}
+						<div class="col">
+							<div class="card bg-card" style="max-width: 18rem;">
+								{% if prods.muestra %}
+									<img src="{{ prods.muestra.url }}" class="card-img-top" alt="{{ prods.nombre }}">
+								{% endif %}
+								<div class="card-body">
+									<h5 id="products-name" class="card-title"> <a href="{% url 'details_productsComprar' pk=prods.pk %}" class="link-dark link-offset-2 link-underline link-underline-opacity-0">{{ prods.nombre }}</a></h5>
+									<p id="products-price" class="card-text">
+										{{ prods.precio }} €
+									</p>
+									<div class="text-end">
+										<button class="addCart btn btn-personalizado color-text" data-name="{{ prods.nombre }}" data-price="{{ prods.precio }}">Añadir</button>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+
+			<!-- Panel de Filtrado -->
+			<div class="offcanvas offcanvas-start" tabindex="-1" id="filtroPanel" aria-labelledby="filtroPanelLabel">
+				<div class="offcanvas-header">
+					<h5 class="offcanvas-title" id="filtroPanelLabel">Panel de Filtrado</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+				</div>
+				<div class="offcanvas-body">
+					<form method="get" action="{% url 'listProducts' %}" class="mb-3">
+						<div class="mb-3">
+							<label for="nombre" class="form-label">Nombre:</label>
+							<input type="text" name="nombre" id="nombre" class="form-control">
+						</div>
+						<div class="mb-3">
+							<label for="categoria" class="form-label">Categoría:</label>
+							{% for categoria in categorias %}
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" name="categorias" id="categoria-{{ categoria.id }}" value="{{ categoria.id }}">
+									<label class="form-check-label" for="categoria-{{ categoria.id }}">
+										{{ categoria.nombre }}
+									</label>
+								</div>
+							{% endfor %}
+						</div>
+						<div class="mb-3">
+							<label for="precio_min" class="form-label">Precio mínimo:</label>
+							<input type="number" id="precio_min" name="precio_min" class="form-control" placeholder="Precio mínimo">
+						</div>
+						<div class="mb-3">
+							<label for="precio_max" class="form-label">Precio máximo:</label>
+							<input type="number" id="precio_max" name="precio_max" class="form-control" placeholder="Precio máximo">
+						</div>
+						<button type="submit" class="btn btn-personalizado color-text"><i class="bi bi-filter"> Filtrar</i></button>
+						<a href="{% url 'listModa' %}" class="btn btn-personalizado color-text">Borrar Filtros</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

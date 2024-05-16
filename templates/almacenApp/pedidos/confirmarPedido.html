@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} Confirmar Pedidos {% endblock %}
+{% block content %}
+    <div class="container-fluids">
+        <div class="row">
+            <div class="col">
+                <article>
+                    <h2 class="text-center text-decoration-underline">Detalles Pedido</h2>
+                    <p><strong>Nombre: </strong> {{ producto.nombre }} </p>
+                    <p><strong>Precio: </strong> {{ producto.precio }} €</p>
+                    <p><strong>Unidades Actuales: </strong> {{ producto.cantidad }} </p>
+                    <p><strong>Unidades Pedidas: </strong> {{ pedido.cantidad_pedida }}</p>
+                    <br><br>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <button type="submit" name="confirmar" class="btn btn-personalizado color-text">Confirmar Pedido</button>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" name="cancelar" class="btn btn-personalizado color-text">Cancelar Pedido</button>
+                        </div>
+                    </form>
+                </article>
+            </div>
+        </div>
+    </div>
+{% endblock %}

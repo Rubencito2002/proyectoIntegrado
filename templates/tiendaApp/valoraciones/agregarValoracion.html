@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Crear Valoracion {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="" method="post" name="valoracion-form" id="valoracion-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

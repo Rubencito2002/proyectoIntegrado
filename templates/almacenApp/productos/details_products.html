@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Detalles Productos {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center text-decoration-underline">Detalles del Producto</h1>
+            <div class="col">
+                <article>
+                    <p><strong>Nombre: </strong> {{ producto.nombre }} </p>
+                    <p><strong>Descripcion: </strong> {{ producto.descripcion }}</p>
+                    <p><strong>Precio: </strong> {{ producto.precio }} €</p>
+                    {% if producto.muestra %}
+                        <img src="{{ producto.muestra.url }}" alt="">
+                    {% endif %}
+                    <br>
+                    <a href="{% url 'update_products' pk=producto.pk %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-clockwise"> Editar</i></a>
+                    <a href="{% url 'delete_products' pk=producto.pk %}" class="btn btn-personalizado color-text"><i class="bi bi-ban"> Eliminar</i></a>
+                    <a href="{% url 'listado_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-left-circle"> Volver</i></a>
+                </article>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,140 @@
+/* Estilos para el modal */
+/* .modal {
+    display: none; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+  } */
+
+/* Estilos para el contenido del modal */
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco */
+    margin: 15% auto; /* Centra el modal verticalmente */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 175% !important; /* Ancho del modal */
+}
+
+/* Estilos para el botón de cerrar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ticket-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Borde inferior para separar los elementos */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticket-item:last-child {
+    border-bottom: none; /* Elimina el borde inferior del último elemento */
+}
+
+.ticket-item .product-name {
+    font-weight: bold;
+}
+
+.ticket-item .product-quantity {
+    float: right; /* Alinea la cantidad a la derecha */
+}
+
+.ticket-total {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.cantidad-input {
+    width: 50px !important; /* Ancho del input */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde del input */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: left; /* Alineación del texto */
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+/* Estilos para la tabla */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Estilos para las celdas */
+.table th, .table td {
+    border-bottom: 1px solid #dee2e6; /* Borde inferior */
+    padding: 8px;
+    text-align: left;
+}
+
+/* Estilos para las filas */
+.table tr {
+    border-top: 1px solid #dee2e6; /* Borde superior */
+}
+
+/* Estilos para el encabezado de la tabla */
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Cambia el color del botón y del contador cuando haya productos en el carrito */
+.carritoProductos {
+    color: #f00; /* Cambia este color al que desees */
+}
+
+/* Estilo por defecto para el icono del carrito */
+#iconCarrito i.bi-cart {
+    color: white !important; /* Color por defecto para el icono */
+}
+
+#iconCarrito{
+    font-size: 1.9rem;
+    color: white !important;
+}
+
+/* Estilo por defecto para el contador de productos */
+#contProducts {
+    display: none; /* Ocultar el contador por defecto */
+    background-color: black; /* Color de fondo del contador */
+    color: white; /* Color del texto del contador */
+    font-size: 0.8rem; /* Tamaño del texto del contador */
+    padding: 0.2rem 0.5rem; /* Espaciado interno del contador */
+    border-radius: 50%; /* Forma circular para el contador */
+}
+
+.feedback-message-add, .feedback-message-delete, .confirmation-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: gray;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    animation: slide-in 0.5s ease-out forwards;
+    display: none; /* Inicialmente oculto */
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

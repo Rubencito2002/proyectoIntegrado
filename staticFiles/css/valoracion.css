@@ -1,0 +1,38 @@
+.star {
+    color: #FFD700; /* Color de las estrellas (amarillo dorado) */
+    font-size: 40px; /* Tamaño de las estrellas */
+    transition: color 0.3s ease; /* Transición de color */
+}
+
+.star-blanco{
+    color: gray;
+    font-size: 40px;
+    transition: color 0.3s ease;
+}
+
+.star:hover {
+    color: #FFA500; /* Color de las estrellas al pasar el cursor (naranja) */
+}
+
+.star-blanco:hover {
+    color: rgb(194, 191, 191); 
+}
+
+.user-info {
+    display: flex; /* Para alinear los elementos horizontalmente */
+    align-items: center; /* Para centrar verticalmente los elementos */
+}
+
+.avatar-container {
+    width: 32px; /* Tamaño del contenedor circular */
+    height: 32px; /* Tamaño del contenedor circular */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    overflow: hidden; /* Oculta cualquier contenido fuera del contenedor */
+    margin-right: 10px; /* Espacio entre el avatar y el nombre de usuario */
+}
+
+.avatar {
+    width: 100%; /* Ajusta el tamaño del avatar al contenedor circular */
+    height: auto; /* Mantiene la proporción del avatar */
+    border-radius: 50%; /* Hace que la imagen sea circular */
+}

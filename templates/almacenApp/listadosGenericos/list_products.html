@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block title %} Gestor Productos {% endblock %}
+{% block content %}
+	<div class="container-fluids">
+		<div class="row">
+			<!-- <h2 class="text-center text-decoration-underline">Bienvenido {{ user.username }} a la tienda. </h2> -->
+            <div class="col-3">
+                <form action="{% url 'listado_products'%}" method="get">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        {{ filtro_form.as_p }}
+                    </div>
+                    <div class="mb-1">
+                        <button type="submit" class="btn btn-personalizado color-text"><i class="bi bi-filter">Filtrar</i></button>
+                    </div>
+                    <div class="mb-3">
+                        <a href="{% url 'listado_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-filter"> Limpiar Filtrar</i></a>
+                    </div>
+                </form>
+                <div class="mb-3">
+                    <a href="{% url 'created_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-bag"> Añadir Productos</i></a>
+                </div>
+                <div class="mb-3">
+                    <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi bi-arrow-return-left"> Volver</i></a>
+                </div>
+            </div>
+			<div class="col-9">
+                <div class="row row-cols-1 row-cols-md-5 g-2">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prods in productos %}
+                                <tr>
+                                    {% if prods.muestra %}
+                                        <td><img src="{{ prods.muestra.url }}" alt="{{ prods.nombre }}" style="max-width: 100px; height: auto;"></td>
+                                    {% endif %}
+                                    <td> {{ prods.nombre }} </td>
+                                    <td> {{ prods.descripcion|truncatechars:20 }}</td>
+                                    <td>
+                                        {% for categoria in prods.categoria.all %}
+                                            {{ categoria.nombre }}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'details_products' pk=prods.pk %}" class="btn btn-personalizado color-text">Detalles</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5">No hay productos disponibles.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Páginacion -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link btn btn-personalizado color-text" href="?page=1" aria-label="First">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link btn btn-personalizado color-text" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&lsaquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active"><span class="page-link btn btn-personalizado color-text">{{ num }}</span></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link btn btn-personalizado color-text" href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link btn btn-personalizado color-text" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                    <span aria-hidden="true">&rsaquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link btn btn-personalizado color-text" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+<!-- <div class="row row-cols-1 row-cols-md-5 g-2">
+					{% for prods in productos %}
+						<div class="col">
+							<div class="card mb-3" style="max-width: 540px;">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        {% if prods.muestra %}
+                                            <img src="{{ prods.muestra.url }}" class="img-fluid rounded-start" alt="{{ prods.nombre }}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h6 class="card-text"> {{ prods.nombre }} </h6>
+                                            <div class="text-end">
+                                                <a href="{% url 'detalles' pk=prods.pk %}" class="btn btn-primary text-end">Detalles</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					{% endfor %}
+				</div> -->

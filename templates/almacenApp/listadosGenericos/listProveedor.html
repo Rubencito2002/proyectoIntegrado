@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %} Listado de Proveedor {% endblock %}
+{% block content %}
+	<div class="container-fluids">
+		<div class="row">
+			<div class="col-6">
+                <h3 class="text-center text-decoration-underline">Listado de proveedor:</h3>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pro in proveedor %}
+                            <tr>
+                                <td> {{ pro.nombre }} </td>
+                                <td>
+                                    <a href="{% url 'update_proveedor' pk=pro.pk %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-clockwise"> Editar</i></a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'delete_proveedor' pk=pro.pk %}" class="btn btn-personalizado color-text"><i class="bi bi-ban"> Eliminar</i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+			</div>
+		</div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-1">
+                    <a href="{% url 'created_proveedor' %}" class="btn btn-personalizado color-text"><i class="bi bi-person-fill-add"> Añadir Proveedor</i></a>
+                    <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi bi-arrow-return-left"> Volver</i></a>
+                </div>
+            </div>
+        </div>
+	</div>
+{% endblock %}

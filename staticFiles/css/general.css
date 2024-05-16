@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Montserrat", sans-serif !important;
+    /* background-color: #638ECB !important; */
+    background-image: url(../img/background.png) !important;
+    background-size: cover; /* Esto hará que la imagen se ajuste para cubrir todo el área del contenedor */
+    background-repeat: no-repeat; /* Esto evitará que la imagen se repita */
+    background-attachment: fixed;
+    padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Estilos específicos para el footer */
+.footer {
+    width: 100%;
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 1000; /* Asegura que el footer esté encima del contenido */
+    display: none; /* Oculta el footer por defecto */
+    color: black;
+}
+
+#logo
+{
+    width: 50px;
+    height: 50px;
+}
+
+.bg-card{
+    background-color: rgba(255, 255, 255, 0.834) !important; 
+    border: none !important;
+}
+
+.bg-body-personalizado{
+    background: linear-gradient(to right, #395886, #586d8c); 
+    /* color: white !important; */
+}
+
+.color-text{
+    color: white !important;
+}
+
+.btn-personalizado{
+    /* background-color: #B1C9EF !important; */
+    background-color: #8AAEE0 !important;
+    border: black !important;
+}
+
+.btn-personalizado:hover{
+    /* background-color: #B1C9EF !important; */
+    background-color: #D5DEEF !important;
+}

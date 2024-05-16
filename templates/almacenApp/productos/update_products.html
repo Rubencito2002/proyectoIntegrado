@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Actualizar Producto {% endblock %}
+{% block content %}
+    <h1>Actualizar producto</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" value="Update" class="btn btn-personalizado color-text">Producto Actualizado</button>
+    </form>
+    <a href="{% url 'listado_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-left-circle"> Volver</i></a>
+{% endblock %}

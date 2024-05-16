@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Informes {% endblock %}
+{% block content %}
+	<div class="container-fluids">
+		<div class="row">
+			<h2 class="text-center text-decoration-underline">Informes:</h2>
+			<div class="col">
+				<div class="grid gap-3 justify-content-center">
+					<div class="p-2 g-col-6 text-center">
+						<a href="{% url 'informePedido' %}" class="btn btn-personalizado color-text"><i class="bi bi-box-seam"> Informe Pedidos</i></a>
+					</div>
+                    <div class="p-2 g-col-6 text-center">
+						<a href="{% url 'informeProdsMasPeds' %}" class="btn btn-personalizado color-text"><i class="bi bi-bag"> Producto más Pedido</i></a>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+{% endblock %}

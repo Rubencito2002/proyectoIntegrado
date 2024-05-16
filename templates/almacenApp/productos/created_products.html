@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Crear Producto {% endblock %}
+{% block content %}
+	<div class="container-fluids">
+		<div class="row">
+			<h1 class="text-center text-decoration-underline">Formulario de Producto</h1>
+			<div class="col">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-personalizado color-text">Nuevo Producto</button>
+                </form>
+                <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-left-circle"> Volver</i></a>
+            </div>
+		</div>
+	</div>
+{% endblock %}

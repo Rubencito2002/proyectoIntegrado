@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %} Listado de Pedidos {% endblock %}
+{% block content %}
+    <div class="container-fluids">
+        <div class="row">
+            <h2 class="text-center text-decoration-underline">Listados de Productos:</h2>
+            <p class="text-center">Listado para poder realizar un pedido del estado actual de los productos.</p>
+            <div class="col-2">
+                <div class="mb-3">
+                    <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-return-left"> Volver</i></a>
+                </div>
+            </div>
+            <div class="col-10">
+                <table class="table table-light table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad Anterior</th>
+                            <th scope="col">Cantidad Actual</th>
+                            <th scope="col">Estado de Pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prods in productos %}
+                            <tr>
+                                {% if prods.cantidad <= prods.limite_cant %}
+                                    {% if prods.estado == 'pedido' %}
+                                        <th class="table-success">{{ prods.nombre }}</th>
+                                        <th class="table-success">{{ prods.precio }} €</th>
+                                        <th class="table-success">{{ prods.cant_anterior }}</th>
+                                        <th class="table-success">{{ prods.cantidad }}</th>
+                                        <th class="table-success"> <a href="{% url 'confirmar_pedido' pk=prods.pk %}" class="btn btn-success">Confirmar Pedido</a> </th> 
+                                    {% else %}
+                                        <th class="table-danger">{{ prods.nombre }}</th>
+                                        <th class="table-danger">{{ prods.precio }} €</th>
+                                        <th class="table-danger">{{ prods.cant_anterior }}</th>
+                                        <th class="table-danger">{{ prods.cantidad }}</th>
+                                        <th class="table-danger"> <a href="{% url 'realizar_pedido' pk=prods.pk %}" class="btn btn-danger">Solicitar Pedido</a> </th> 
+                                    {% endif %}
+                                {% else %}
+                                    <th class="table-info"> {{ prods.nombre }} </th>
+                                    <th class="table-info"> {{ prods.precio }} € </th>
+                                    <th class="table-info">{{ prods.cant_anterior }}</th>
+                                    <th class="table-info"> {{ prods.cantidad }} </th>
+                                    <th class="table-info"> {{ prods.estado}} </th>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

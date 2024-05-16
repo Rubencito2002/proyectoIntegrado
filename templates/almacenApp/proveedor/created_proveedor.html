@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Crear Proveedor {% endblock %}
+{% block content %}
+	<div class="container-fluids">
+		<div class="row">
+			<h1 class="text-center text-decoration-underline">Formulario de Proveedor</h1>
+			<div class="col">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-personalizado color-text">Nuevo Proveedor</button>
+                </form>
+                <a href="{% url 'listProveedor' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-left-circle"> Volver</i></a>
+            </div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Solicitud de Pedido {% endblock %}
+{% block content %}
+<div class="container-fluids">
+    <div class="row">
+        <div class="col">
+            <article>
+                <h2 class="text-center text-decoration-underline">Detalles Producto</h2>
+                <p><strong>Nombre: </strong> {{ producto.nombre }} </p>
+                <p><strong>Precio: </strong> {{ producto.precio }} </p>
+                <p><strong>Unidades Actuales: </strong> {{ producto.cantidad }} </p>
+                {% if producto.portada %}
+                    <img src="{{ producto.imagen.url }}" alt="">
+                {% endif %}
+            </article>    
+        </div>
+        <div class="col-6">
+            <article>
+                <h2 class="text-center text-decoration-underline">Formulario de Pedido</h2>
+                <form action="{% url 'realizar_pedido' pk=producto.pk %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-personalizado color-text">Realizar Pedido</button>
+                </form>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock %}

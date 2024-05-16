@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %} Confirmacion de Compra {% endblock %}
+{% block content %}
+
+    <!-- Mensaje de confirmacion de compra realizada -->
+    <div id="confirmation-message" class="confirmation-message" style="display: none;">
+        ¡Gracias por tu compra!
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <h2 class="text-center text-decoration-underline">Dirección de envío</h2>
+                <form action="" method="post" name="formularioEnvio" id="formularioEnvio">
+                    {% csrf_token %}
+                    <!-- {{ form.as_p }} -->
+                    <div class="mb-3">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" name="direccion" id="direccion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ciudad" class="form-label">Ciudad</label>
+                        <input type="text" class="form-control" name="ciudad" id="ciudad">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pais" class="form-label">País</label>
+                        <input type="text" class="form-control" name="pais" id="pais">
+                    </div>
+                    <div class="mb-3">
+                        <label for="codigo_postal" class="form-label">Codigo Postal</label>
+                        <input type="text" class="form-control" name="codigo_postal" id="codigo_postal">
+                    </div>
+                </form>
+                <h2 class="text-center text-decoration-underline">Método de pago</h2>
+                <form action="" method="post" name="formularioPago" id="formularioPago">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="radio" class="form-check-input" name="formaPago" id="tarjeta" value="tarjeta">
+                        <label for="tarjeta" class="form-label">Tarjeta de crédito/débito</label>
+                    </div>
+
+                    <div id="datosPagoTarjeta">
+                        <div id="tarjetaDiv">
+                            <div class="mb-3">
+                                <label for="numero_tarjeta" class="form-label">Numero Tarjeta:</label>
+                                <input type="text" class="form-control" name="numero_tarjeta" id="numero_tarjeta">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento:</label>
+                                <input type="text" class="form-control" name="fecha_vencimiento" id="fecha_vencimiento">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cvv" class="form-label">CVV:</label>
+                                <input type="text" class="form-control" name="cvv" id="cvv">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="radio" class="form-check-input" name="formaPago" id="paypal" value="paypal">
+                        <label for="paypal" class="form-label">PayPal</label>
+                    </div>
+                    
+                    <div id="datosPagoPaypal">
+                        <div id="paypalDiv">
+                            <div class="mb-3">
+                                <label for="correo_paypal" class="form-label">Correo PayPal:</label>
+                                <input type="text" class="form-control" name="email_paypal" id="email_paypal">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="radio" class="form-check-input" name="formaPago" id="saldo" value="saldo">
+                        <label for="saldo" class="form-label">Saldo de cuenta</label>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="col-8">
+                <h2 class="text-center text-decoration-underline">Detalles del pedido</h2>
+                <table class="table table-light table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaCarrito">
+                        <!-- Aquí se mostrarán los productos del carrito -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="total">
+                            <td colspan="3">Total:</td>
+                            <td id="totalCompra"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <button id="btnConfirmarCompra" class="btn btn-personalizado color-text">Confirmar Compra</button>
+    </div>
+{% endblock %}

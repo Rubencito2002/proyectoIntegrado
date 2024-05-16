@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %} Informes de Pedidos {% endblock %}
+{% block content %}
+	<div class="container-fluids">
+		<div class="row">
+			<h2 class="text-center text-decoration-underline">Informes de Pedidos:</h2>
+			<div class="col-2">
+				<form name="frm" method="get">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Estado Pedido: </label>
+                        <select name="estadoPeds" id="estadoPeds" class="form-select">
+                            <option value="all" selected>-------</option>
+                            <option value="pedido">pedido</option>
+                            <option value="finalizado">finalizado</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Proveedor: </label>
+                        <select name="proveedorPeds" id="proveedorPeds" class="form-select">
+                            <option value="all" selected>-------</option>
+                            {% for prov in proveedor %}
+                                <option value="{{ prov.id }}">{{ prov.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-personalizado color-text"><i class="bi bi-filter">Filtrar</i></button>
+                    </div>
+                    <div class="mb-3">
+                        <a href="{% url 'informePedido' %}" class="btn btn-personalizado color-text">Limpiar Filtro</a>
+                    </div>
+                </form>
+                <a href="{% url 'informes' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-return-left"> Volver</i></a>
+			</div>
+            <div class="col-10">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Fecha Pedido</th>
+                            <th scope="col">Nombre Producto</th>
+                            <th scope="col">Proveedor</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {% for peds in pedidoFiltrado %}
+                                <tr>
+                                    <td>{{ peds.fecha_pedida }}</td>
+                                    <td>{{ peds.producto.nombre }}</td>
+                                    <td>{{ peds.proveedor }}</td>
+                                    <td>{{ peds.usuario }}</td>
+                                    <td>{{ peds.estado }}</td>
+                                </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+                <p>Total de pedidos realizado: {{ pedidoFiltrado|length }}</p>
+            </div>
+		</div>
+	</div>
+{% endblock %}
