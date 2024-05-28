@@ -222,8 +222,8 @@ class ConfirmarPeds(View):
         return render(request, self.confirmar_template, {'producto': producto, 'pedido': pedido_realizado})
     
 # Vista para mostrar todos los informes.
-def informes(request):
-    return render(request, 'almacenApp/informes/informes.html', {})
+# def informes(request):
+#     return render(request, 'almacenApp/informes/informes.html', {})
 
 # Vista de un informes de los pedidos que se puede filtrar por su estado, por el usuario pedido, por el proveedor.
 class informePedido(ListView):

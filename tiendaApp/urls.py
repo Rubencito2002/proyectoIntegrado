@@ -19,4 +19,5 @@ urlpatterns = [
 
     # Valoraciones.
     path('valoracion/<int:pk>/', views.agregarValoracion, name='agregarValoracion'),
+    path('valoracion/update/<int:pk>/', UpdateValoracion.as_view(), name='updateValoracion'),
 ]

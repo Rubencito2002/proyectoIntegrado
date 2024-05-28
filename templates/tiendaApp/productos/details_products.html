@@ -67,14 +67,16 @@
                             <span class="star">&#9733;</span>
                             <span class="star">&#9733;</span>
                         {% else %}
-                        <span class="star-blanco">&#9733;</span>
-                        <span class="star-blanco">&#9733;</span>
-                        <span class="star-blanco">&#9733;</span>
-                        <span class="star-blanco">&#9733;</span>
-                        <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
+                            <span class="star-blanco">&#9733;</span>
                         {% endif %}
                         <h6>Comentario:</h6>
                         <p>{{ coment.comentario }}</p>
+                        <br>
+                        <a href="{% url 'updateValoracion' pk=coment.pk %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-clockwise"> Editar</i></a>
                     </article>
                 {% endfor %}
                 <!-- <p>{{ producto.descripcion }}</p> -->

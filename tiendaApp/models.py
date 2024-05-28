@@ -1,9 +1,10 @@
 from django.db import models
 from almacenApp.models import *
+from gestionUsuario.models import *
 
 # Modelos de datos para poder crear las ordenes de compra de los productos.
 class DatosEnvio(models.Model):
-    usuario = models.ForeignKey(Empleados, on_delete=models.CASCADE, blank=True, null=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     direccion = models.CharField(max_length=255)
     ciudad = models.CharField(max_length=100)
     pais = models.CharField(max_length=100)
@@ -19,7 +20,7 @@ class Forma_Pago(models.Model):
         ('saldo_cuenta', 'Saldo de cuenta'),
     )
 
-    usuario = models.ForeignKey(Empleados, on_delete=models.CASCADE, blank=True, null=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     metodo_pago = models.CharField(max_length=255, choices=METODO_PAGO)
 
     def __str__(self):
@@ -42,7 +43,7 @@ class DetallesPayPal(models.Model):
         return f"Detalles de Tarjeta de {self.forma_Pago.metodo_pago}"
     
 class OrdenCompraProducto(models.Model):
-    usuario = models.ForeignKey(Empleados, on_delete=models.CASCADE, blank=True, null=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     fecha = models.DateField(auto_now=True, blank=True, null=True)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
@@ -60,7 +61,7 @@ class Valoracion(models.Model):
         (5, '★★★★★')
     )
 
-    usuario = models.ForeignKey(Empleados, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     valoracion = models.IntegerField(choices=VALORACIONES, default=0)
     comentario = models.TextField(blank=True, null=True)

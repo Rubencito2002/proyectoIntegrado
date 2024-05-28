@@ -31,7 +31,7 @@ urlpatterns = [
     path('proveedor/update/<int:pk>/', UpdateProveedor.as_view(), name='update_proveedor'),
     path('proveedor/delete/<int:pk>/', DeleteProveedor.as_view(), name='delete_proveedor'),
     # Informes.
-    path('informes/', views.informes, name='informes'),
+    # path('informes/', views.informes, name='informes'),
     path('informes/informePedido/', informePedido.as_view(), name='informePedido'),
     path('informes/productoMásPeds/', informeProdsMasPeds.as_view(), name='informeProdsMasPeds'),
 

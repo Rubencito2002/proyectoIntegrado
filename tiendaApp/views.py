@@ -1,10 +1,11 @@
 from typing import Any
 from django.db.models.query import QuerySet
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 from almacenApp.models import *
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.http import JsonResponse
 import json
 
@@ -261,3 +262,12 @@ def agregarValoracion(request, pk):
     else:
         form = ValoracionForms()
         return render(request, 'tiendaApp/valoraciones/agregarValoracion.html', {'form':form})
+    
+# Vista para la modificacion de una valoracion.
+class UpdateValoracion(UpdateView):
+    model = Valoracion
+    fields = ['valoracion', 'comentario']
+    template_name = 'tiendaapp/valoraciones/update_valoracion.html'
+
+    def get_success_url(self):
+        return reverse_lazy('details_productsComprar', kwargs={'pk': self.object.pk})

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Actualizar Valoracion {% endblock %}
+{% block content %}
+    <h1>Actualizar valoracion</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" value="Update" class="btn btn-personalizado color-text">Valoracion Actualizado</button>
+    </form>
+    <a href="{% url 'listProducts' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-left-circle"> Volver</i></a>
+{% endblock %}

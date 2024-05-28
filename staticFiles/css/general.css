@@ -61,3 +61,12 @@ body {
     /* background-color: #B1C9EF !important; */
     background-color: #D5DEEF !important;
 }
+
+.custom-link {
+    color: black;
+    text-decoration: none;
+}
+.custom-link:hover {
+    text-decoration: underline;
+    color: darkgray;
+}

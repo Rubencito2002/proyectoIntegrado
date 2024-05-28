@@ -14,10 +14,26 @@
 						<a href="{% url 'listadoMarcaYCategoria' %}" class="btn btn-personalizado color-text"><i class="bi bi-file-person"> Listado de Marca Y Categoria</i></a>
 						<a href="{% url 'listProveedor' %}" class="btn btn-personalizado color-text"><i class="bi bi-file-person"> Listado de Proveedores</i></a>
 					</div>
-					<div class="p-2 g-col-6 text-center">
-						<a href="{% url 'informes' %}" class="btn btn-personalizado color-text"><i class="bi bi-bookmark"> Informes</i></a>
+
+					<div class="accordion p-2 g-col-6" id="accordionFlushExample">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									Listados de Informes
+								</button>
+							</h2>
+							<div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+								<div class="accordion-body">
+									<a href="{% url 'informePedido' %}" class="btn btn-personalizado color-text"><i class="bi bi-box-seam"> Informe Pedidos</i></a>
+									<a href="{% url 'informeProdsMasPeds' %}" class="btn btn-personalizado color-text"><i class="bi bi-bag"> Producto más Pedido</i></a>
+								</div>
+							</div>
+						</div>
 					</div>
+
 				</div>
+
+				
 			</div>
 		</div>
 	</div>

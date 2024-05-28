@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-AUTH_USER_MODEL = "almacenApp.Empleados"
+AUTH_USER_MODEL = "gestionUsuario.User"
 
 # Application definition
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'almacenApp',
     'tiendaApp',
+    'gestionUsuario',
 ]
 
 MIDDLEWARE = [
@@ -79,10 +80,10 @@ WSGI_APPLICATION = 'generalSite.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # DATABASES = {
