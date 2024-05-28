@@ -62,11 +62,33 @@ body {
     background-color: #D5DEEF !important;
 }
 
-.custom-link {
-    color: black;
-    text-decoration: none;
-}
-.custom-link:hover {
-    text-decoration: underline;
-    color: darkgray;
+@media (max-width: 768px) {
+    .navbar-collapse {
+        text-align: center !important;
+    }
+
+    .navbar-nav {
+        flex-direction: column !important;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0.5rem 0 !important;
+    }
+
+    .navbar-text {
+        margin-top: 1rem !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .dropdown-menu {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        text-align: left !important;
+    }
+
+    .dropdown-menu::before {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
 }

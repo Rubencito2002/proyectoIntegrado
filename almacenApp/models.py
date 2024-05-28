@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from gestionUsuario.models import *
+from gestionUsuarios.models import *
+
 # Modelos de datos para la gestion de usuarios.
 # class Empleados(AbstractUser):
 #     dni = models.CharField(max_length=20)

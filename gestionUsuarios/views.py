@@ -31,10 +31,10 @@ def register_user(request):
             return redirect('success')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'gestionUsuario/registroUsuario/register_user.html', {'form': form})
+    return render(request, 'gestionUsuarios/registroUsuario/register_user.html', {'form': form})
 
 def success(request):
-    return render(request, 'gestionUsuario/registroUsuario/success.html')
+    return render(request, 'gestionUsuarios/registroUsuario/success.html')
 
 def redirect_to_home(request):
     return redirect('/')
@@ -49,7 +49,7 @@ def login_view(request):
             return redirect('/')  # Redirige a la página de inicio después de iniciar sesión
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})
-    return render(request, 'gestionUsuario/login/login.html')
+    return render(request, 'gestionUsuarios/login/login.html')
 
 def logout_view(request):
     logout(request)

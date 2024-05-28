@@ -1,6 +1,6 @@
 from django.db import models
 from almacenApp.models import *
-from gestionUsuario.models import *
+from gestionUsuarios.models import *
 
 # Modelos de datos para poder crear las ordenes de compra de los productos.
 class DatosEnvio(models.Model):
