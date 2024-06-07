@@ -12,20 +12,24 @@
 				<div class="row row-cols-1 row-cols-md-5 g-2">
 					{% for prods in productos %}
 						<div class="col">
-							<div class="card bg-card" style="max-width: 18rem;">
-								{% if prods.muestra %}
-									<img src="{{ prods.muestra.url }}" class="card-img-top" alt="{{ prods.nombre }}">
-								{% endif %}
-								<div class="card-body">
-									<h5 id="products-name" class="card-title"> <a href="{% url 'details_productsComprar' pk=prods.pk %}" class="link-dark link-offset-2 link-underline link-underline-opacity-0">{{ prods.nombre }}</a></h5>
-									<p id="products-price" class="card-text">
-										{{ prods.precio }} €
-									</p>
-									<div class="text-end">
-										<!-- <a href="#" class="btn btn-primary text-end">Añadir</a> -->
-										<button class="addCart btn btn-personalizado color-text" data-name="{{ prods.nombre }}" data-price="{{ prods.precio }}">Añadir</button>
+							<div class="card card-personalizado">
+								<div class="row g-0">
+									<div class="col-md-4">
+										{% if prods.muestra %}
+											<img src="{{ prods.muestra.url }}" class="card-img-top" alt="{{ prods.nombre }}">
+										{% endif %}
 									</div>
-									
+									<div class="col-md-8">
+										<div class="card-body">
+											<h5 id="products-name" class="card-title"> <a href="{% url 'details_productsComprar' pk=prods.pk %}" class="link-dark link-offset-2 link-underline link-underline-opacity-0">{{ prods.nombre }}</a></h5>
+											<p id="products-price" class="card-text card-text-personalizado">
+												{{ prods.precio }} €
+											</p>
+											<div class="text-end">
+												<button class="addCart btn btn-personalizado color-text" data-name="{{ prods.nombre }}" data-price="{{ prods.precio }}">Añadir</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
