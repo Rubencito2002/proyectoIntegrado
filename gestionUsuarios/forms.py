@@ -10,7 +10,6 @@ class CustomUserCreationForm(UserCreationForm):
     dni = forms.CharField(max_length=20, required=False)
     direccion = forms.CharField(max_length=255, required=False)
     telefono = forms.CharField(max_length=20, required=False)
-    salario = forms.DecimalField(max_digits=10, decimal_places=2, required=False)
     cargo = forms.ModelChoiceField(queryset=Cargo.objects.all(), required=False)
 
     # Campos adicionales para cliente
@@ -18,7 +17,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'user_type', 'dni', 'direccion', 'telefono', 'salario', 'cargo', 'tipo_pago')
+        fields = ('username', 'email', 'first_name', 'last_name', 'user_type', 'dni', 'direccion', 'telefono', 'cargo', 'tipo_pago')
 
     # Sobreescribir el método save para marcar el tipo de usuario
     def save(self, commit=True):

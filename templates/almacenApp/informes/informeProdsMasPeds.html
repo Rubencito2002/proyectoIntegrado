@@ -5,6 +5,10 @@
 		<div class="row">
 			<h2 class="text-center text-decoration-underline">Informes de Producto más pedido:</h2>
 			<div class="col-2">
+                <form action="{% url 'descargarInformeProdsMasPeds' %}" method="get" target="_blank">
+                    <button type="submit" class="btn btn-personalizado color-text"><i class="bi bi-file-earmark-arrow-down"> CSV</i></button>
+                </form>
+
                 <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-return-left"> Volver</i></a>
 			</div>
             <div class="col-10">

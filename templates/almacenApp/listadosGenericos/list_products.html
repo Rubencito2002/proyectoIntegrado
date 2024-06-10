@@ -17,9 +17,11 @@
                         <a href="{% url 'listado_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-filter"> Limpiar Filtrar</i></a>
                     </div>
                 </form>
-                <div class="mb-3">
-                    <a href="{% url 'created_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-bag"> Añadir Productos</i></a>
-                </div>
+                {% if user.empleado.cargo.nombre == 'Administrador del Sistema' or user.is_staff or user.is_superuser%}
+                    <div class="mb-3">
+                        <a href="{% url 'created_products' %}" class="btn btn-personalizado color-text"><i class="bi bi-bag"> Añadir Productos</i></a>
+                    </div>
+                {% endif %}
                 <div class="mb-3">
                     <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi bi-arrow-return-left"> Volver</i></a>
                 </div>

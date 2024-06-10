@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} Informes {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center text-decoration-underline">Informe de Usuarios Activos en el Último Mes: </h2>
+            <div class="col-2">
+                <form action="{% url 'descargarInformeUsuario' %}" method="get" target="_blank">
+                    <button type="submit" class="btn btn-personalizado color-text"><i class="bi bi-file-earmark-arrow-down"> CSV</i></button>
+                </form>
+                <!-- <a href="{% url 'descargarInformeUsuario' %}" class="btn btn-secondary"><i class="bi bi-arrow-return-left"> Descargar CSV</i></a> -->
+                <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-return-left"> Volver</i></a>
+			</div>
+            <div class="col-10">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Nombre Completo</th>
+                        <th scope="col">Cargo</th>
+                        <th scope="col">Último inicio de sesión</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for empleado in usuarios_activo %}
+                            <tr>
+                                <td>{{ empleado.user.username }}</td>
+                                <td>{{ empleado.user.get_full_name }}</td>
+                                <td>{{ empleado.cargo }}</td>
+                                <td>{{ empleado.user.last_login }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p>Total de usuarios activos en el último mes: {{ usuarios_activo |length }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

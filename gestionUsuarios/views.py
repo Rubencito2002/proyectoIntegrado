@@ -17,9 +17,9 @@ def register_user(request):
                 dni = form.cleaned_data.get('dni')
                 direccion = form.cleaned_data.get('direccion')
                 telefono = form.cleaned_data.get('telefono')
-                salario = form.cleaned_data.get('salario')
+                # salario = form.cleaned_data.get('salario')
                 cargo = form.cleaned_data.get('cargo')
-                Empleado.objects.create(user=user, dni=dni, direccion=direccion, telefono=telefono, salario=salario, cargo=cargo)
+                Empleado.objects.create(user=user, dni=dni, direccion=direccion, telefono=telefono, cargo=cargo)
             elif user.is_cliente:
                 # Guardar datos adicionales de cliente
                 dni = form.cleaned_data.get('dni')

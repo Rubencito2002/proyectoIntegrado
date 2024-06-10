@@ -1,12 +1,16 @@
+import csv
 from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.db.models import Sum
 from django.views import View
+from django.http import HttpResponse
+from django.utils import timezone
 from django.http import JsonResponse
 from .models import *
 from .forms import *
-from django.views.generic import ListView,DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Vista de página principal del sistema de almacenamiento.
 def welcome(request):
@@ -220,10 +224,6 @@ class ConfirmarPeds(View):
                 return redirect('listProductsPeds')
         
         return render(request, self.confirmar_template, {'producto': producto, 'pedido': pedido_realizado})
-    
-# Vista para mostrar todos los informes.
-# def informes(request):
-#     return render(request, 'almacenApp/informes/informes.html', {})
 
 # Vista de un informes de los pedidos que se puede filtrar por su estado, por el usuario pedido, por el proveedor.
 class informePedido(ListView):
@@ -236,11 +236,9 @@ class informePedido(ListView):
 
         context['pedidos'] = Pedido.objects.all()
         context['proveedor'] = Proveedor.objects.all()
-        # context['usuarios']
 
         estadoPeds = self.request.GET.get('estadoPeds')
         proveedorPeds = self.request.GET.get('proveedorPeds')
-        # usuarioPeds
 
         pedsFiltrado = Pedido.objects.all()
 
@@ -250,14 +248,42 @@ class informePedido(ListView):
         if proveedorPeds != None and proveedorPeds != 'all':
             pedsFiltrado = Pedido.objects.filter(proveedor = proveedorPeds)
 
-        # if usuarioPeds != None and usuarioPeds != 'all':
-        #     pedsFiltrado = Pedido.objects.filter(usuario = usuarioPeds)
-
         pedsFiltrado = pedsFiltrado.order_by('-fecha_pedida')
 
         context['pedidoFiltrado'] = pedsFiltrado
         return context
     
+# Vista para la descarga del informe de los pedido.
+def descargarInformePedidos(request):
+    # 
+    estadoPeds = request.GET.get('estadoPeds', 'all')
+    proveedorPeds = request.GET.get('proveedorPeds', 'all')
+
+    # Filtrar los pedidos segun los parametros
+
+    pedsFiltrado = Pedido.objects.all()
+
+    if estadoPeds and estadoPeds != 'all':
+        pedsFiltrado = pedsFiltrado.filter(estado=estadoPeds)
+
+    if proveedorPeds and proveedorPeds != 'all':
+        pedsFiltrado = pedsFiltrado.filter(proveedor_id=proveedorPeds)
+
+    # Crear la respuesta HTTP con el tipo de contenido de texto/csv
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="informe_pedidos.csv"'
+
+    # Crear un escritor CSV utilizando la respuesta como el "archivo"
+    writer = csv.writer(response, delimiter=';')
+    # Escribir la cabecera del CSV
+    writer.writerow(['Fecha Pedido', 'Nombre Producto', 'Proveedor', 'Usuario', 'Estado'])
+
+    # Escribir los datos
+    for pedido in pedsFiltrado:
+        writer.writerow([pedido.fecha_pedida, pedido.producto.nombre, pedido.proveedor.nombre, pedido.usuario.username, pedido.estado])
+
+    return response
+
 # Vista de los productos más pedido.
 class informeProdsMasPeds(ListView):
     model = Producto
@@ -266,8 +292,63 @@ class informeProdsMasPeds(ListView):
 
     def get_queryset(self):
         return Producto.objects.annotate(total_pedido=Sum('pedido__cantidad_pedida')).order_by('-total_pedido')
-    
-# 
 
+# Vista para la descarga del informe de los productos más pedido.
+def descargarInformeProdsMasPeds(request):
+    # Obtener los productos ordenados por la cantidad total pedida
+    productos_mas_pedido = Producto.objects.annotate(total_pedido=Sum('pedido__cantidad_pedida')).order_by('-total_pedido')
+
+    # Crear la respuesta HTTP con el tipo de contenido de texto/csv
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="informe_productos_mas_pedidos.csv"'
+    # Crear un escritor CSV utilizando la respuesta como el "archivo"
+    writer = csv.writer(response, delimiter=';')
+
+    # Escribir la cabecera del CSV
+    writer.writerow(['Nombre del Producto', 'Cantidad Actual', 'Total Pedidos'])
+
+    # Escribir los datos
+    for producto in productos_mas_pedido:
+        writer.writerow([producto.nombre, producto.cantidad, producto.total_pedido])
+
+    return response
+
+# Vista de los usuarios más activos del ultimo mes.
+class informeUsuarioActivo(ListView):
+    model = Empleado
+    template_name = 'almacenApp/informes/informesUsuarioActivo.html'
+    context_object_name = 'usuarios_activo'
+
+    def get_queryset(self):
+        # Definir el rango de tiempo (últimos 30 días)
+        ultimo_mes = timezone.now() - timezone.timedelta(days=30)
+        # Filtrar usuarios que se han conectado en los últimos 30 días
+        usuarios_activos = User.objects.filter(last_login__gte=ultimo_mes)
+        # Obtener los empleados correspondientes a esos usuarios
+        empleados_activos = Empleado.objects.filter(user__in=usuarios_activos)
+        return empleados_activos
+    
+# Vista para la descarga del informe de los usuarios activos.
+def descargarInformeUsuario(request):
+    # Definir el rango de tiempo (últimos 30 días)
+    ultimo_mes = timezone.now() - timezone.timedelta(days=30)
+    # Filtrar usuarios que se han conectado en los últimos 30 días
+    usuarios_activos = User.objects.filter(last_login__gte=ultimo_mes)
+    # Obtener los empleados correspondientes a esos usuarios
+    empleados_activos = Empleado.objects.filter(user__in=usuarios_activos)
+
+    # Crear la respuesta HTTP con el tipo de contenido de texto/csv
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="informe_usuarios_activos.csv"'
+    # Crear un escritor CSV utilizando la respuesta como el "archivo"
+    writer = csv.writer(response, delimiter=';')
+    # Escribir la cabecera del CSV
+    writer.writerow(['Nombre de Usuario', 'Nombre del empleado', 'Cargo', 'Ultimo Inicio de Sesion'])
+
+    # Escribir los datos
+    for empleado in empleados_activos:
+        writer.writerow([empleado.user.username, empleado.user.get_full_name(), empleado.cargo, empleado.user.last_login])
+
+    return response
 
 # 

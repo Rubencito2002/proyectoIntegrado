@@ -10,17 +10,17 @@
                     <div class="mb-3">
                         <label class="form-label">Estado Pedido: </label>
                         <select name="estadoPeds" id="estadoPeds" class="form-select">
-                            <option value="all" selected>-------</option>
-                            <option value="pedido">pedido</option>
-                            <option value="finalizado">finalizado</option>
+                            <option value="all" {% if estadoPeds == 'all' %}selected{% endif %}>-------</option>
+                            <option value="pedido" {% if estadoPeds == 'pedido' %}selected{% endif %}>pedido</option>
+                            <option value="finalizado" {% if estadoPeds == 'finalizado' %}selected{% endif %}>finalizado</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Proveedor: </label>
                         <select name="proveedorPeds" id="proveedorPeds" class="form-select">
-                            <option value="all" selected>-------</option>
+                            <option value="all" {% if proveedorPeds == 'all' %}selected{% endif %}>-------</option>
                             {% for prov in proveedor %}
-                                <option value="{{ prov.id }}">{{ prov.nombre }}</option>
+                                <option value="{{ prov.id }}" {% if proveedorPeds == prov.id|stringformat:"s" %}selected{% endif %}>{{ prov.nombre }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -31,6 +31,13 @@
                         <a href="{% url 'informePedido' %}" class="btn btn-personalizado color-text">Limpiar Filtro</a>
                     </div>
                 </form>
+
+                <form action="" method="get">
+                    <input type="hidden" name="estadoPeds" value="{{ estadoPeds }}">
+                    <input type="hidden" name="proveedorPeds" value="{{ proveedorPeds }}">
+                    <button type="submit" class="btn btn-personalizado color-text"><i class="bi bi-file-earmark-arrow-down"> CSV</i></button>
+                </form>
+
                 <a href="{% url 'almacen' %}" class="btn btn-personalizado color-text"><i class="bi bi-arrow-return-left"> Volver</i></a>
 			</div>
             <div class="col-10">
