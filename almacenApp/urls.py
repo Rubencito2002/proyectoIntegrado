@@ -23,19 +23,19 @@ urlpatterns = [
     # Gestion de Marcas y Categoria.
     path('listadoMarcaYCategoria/', ListMarcaYCategoria.as_view(), name='listadoMarcaYCategoria'),
     # Gestion de Pedidos.
-    path('pedidos/', ListProductsPeds.as_view(), name='listProductsPeds'),
-    path('pedidos/solicitar/<int:pk>/', RealizarPeds.as_view(), name='realizar_pedido'),
-    path('pedidos/confirmar/<int:pk>/', ConfirmarPeds.as_view(), name='confirmar_pedido'),
+    path('pedidos/', gerente_compras(ListProductsPeds.as_view()), name='listProductsPeds'),
+    path('pedidos/solicitar/<int:pk>/', gerente_compras(RealizarPeds.as_view()), name='realizar_pedido'),
+    path('pedidos/confirmar/<int:pk>/', gerente_compras(ConfirmarPeds.as_view()), name='confirmar_pedido'),
     # Gestion de Proveedor.
     path('proveedor/', ListProveedor.as_view(), name='listProveedor'),
     path('proveedor/created/', administrador_sistema(CreatedProveedor.as_view()), name='created_proveedor'),
     path('proveedor/update/<int:pk>/', administrador_sistema(UpdateProveedor.as_view()), name='update_proveedor'),
     path('proveedor/delete/<int:pk>/', administrador_sistema(DeleteProveedor.as_view()), name='delete_proveedor'),
     # Informes.
-    path('informes/informePedido/', informePedido.as_view(), name='informePedido'),
-    path('descargarInformeUsuario/', descargarInformeUsuario, name='descargarInformePedido'),
-    path('informes/productoMásPeds/', informeProdsMasPeds.as_view(), name='informeProdsMasPeds'),
-    path('descargarInformeProdsMasPeds/', descargarInformeProdsMasPeds, name='descargarInformeProdsMasPeds'),
-    path('informes/usuarioActivo/', informeUsuarioActivo.as_view(), name='informeUsuarioActivo'),
-    path('descargarInformeUsuario/', descargarInformeUsuario, name='descargarInformeUsuario'),
+    path('informes/informePedido/', analista_datos(informePedido.as_view()), name='informePedido'),
+    path('descargarInformeUsuario/', analista_datos(descargarInformeUsuario), name='descargarInformePedido'),
+    path('informes/productoMásPeds/', analista_datos(informeProdsMasPeds.as_view()), name='informeProdsMasPeds'),
+    path('descargarInformeProdsMasPeds/', analista_datos(descargarInformeProdsMasPeds), name='descargarInformeProdsMasPeds'),
+    path('informes/usuarioActivo/', analista_datos(informeUsuarioActivo.as_view()), name='informeUsuarioActivo'),
+    path('descargarInformeUsuario/', analista_datos(descargarInformeUsuario), name='descargarInformeUsuario'),
 ]
