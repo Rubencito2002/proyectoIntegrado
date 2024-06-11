@@ -47,7 +47,7 @@ body {
     color: black;
 }
 
-.bg-body-personalizado{
+.bg-personalizado{
     background: linear-gradient(to right, #395886, #586d8c); 
     /* color: white !important; */
 }
@@ -96,4 +96,21 @@ body {
         left: 50% !important;
         transform: translateX(-50%) !important;
     }
+}
+
+.btn-custom{
+    background-color: #8AAEE0 !important;
+    border: white !important;
+    right: 15px !important;
+    bottom: 15px !important;
+    z-index: 99999 !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 4px !important;
+    position: fixed !important;
+    color: white !important;
+}
+
+.btn-custom:hover{
+    background-color: #D5DEEF !important;
 }
