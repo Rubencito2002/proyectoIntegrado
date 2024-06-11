@@ -17,7 +17,6 @@ def register_user(request):
                 dni = form.cleaned_data.get('dni')
                 direccion = form.cleaned_data.get('direccion')
                 telefono = form.cleaned_data.get('telefono')
-                # salario = form.cleaned_data.get('salario')
                 cargo = form.cleaned_data.get('cargo')
                 Empleado.objects.create(user=user, dni=dni, direccion=direccion, telefono=telefono, cargo=cargo)
             elif user.is_cliente:
@@ -53,7 +52,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redirige a la página de inicio de sesión después de cerrar sesión
+    return redirect('/')  # Redirige a la página de inicio de sesión después de cerrar sesión
 
 # def signup_view(request):
 #     if request.method == "POST":

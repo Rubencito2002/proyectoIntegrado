@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .views import *
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     # Generales.
@@ -18,6 +19,6 @@ urlpatterns = [
     path('confirmarCompra/', views.confirmarCompra, name='confirmarCompra'),
 
     # Valoraciones.
-    path('valoracion/<int:pk>/', views.agregarValoracion, name='agregarValoracion'),
-    path('valoracion/update/<int:pk>/', UpdateValoracion.as_view(), name='updateValoracion'),
+    path('valoracion/<int:pk>/', login_required(views.agregarValoracion), name='agregarValoracion'),
+    path('valoracion/update/<int:pk>/', login_required(UpdateValoracion.as_view()), name='updateValoracion'),
 ]
