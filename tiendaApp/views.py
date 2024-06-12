@@ -6,6 +6,7 @@ from .models import *
 from .forms import *
 from almacenApp.models import *
 from django.views.generic import ListView, DetailView, UpdateView
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
 
@@ -171,6 +172,7 @@ def confirmarCompra(request):
     return render(request, 'tiendaApp/compras/confirmarCompra.html', {'carrito': carrito, 'total': total})
 
 # Vista para procesar la compra de los productos.
+@login_required
 def procesarCompra(request):
     if request.method == 'POST':
         data = json.loads(request.body)

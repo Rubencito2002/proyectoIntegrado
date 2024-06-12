@@ -18,25 +18,7 @@ body {
     flex: 1;
 }
 
-/* Estilos específicos para el footer */
-.footer {
-    width: 100%;
-    background-color: transparent;
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    bottom: 0;
-    z-index: 1000; /* Asegura que el footer esté encima del contenido */
-    display: none; /* Oculta el footer por defecto */
-    color: black;
-}
-
-#logo
-{
-    width: 50px;
-    height: 50px;
-}
-
+/* Estilos de las cartas. */
 .card-personalizado{
     /* background-color: rgba(255, 255, 255, 0.834) !important;  */
     border: none !important;
@@ -47,24 +29,9 @@ body {
     color: black;
 }
 
+/* Estilos de Encanbezado. */
 .bg-personalizado{
-    background: linear-gradient(to right, #395886, #586d8c); 
-    /* color: white !important; */
-}
-
-.color-text{
-    color: white !important;
-}
-
-.btn-personalizado{
-    /* background-color: #B1C9EF !important; */
-    background-color: #8AAEE0 !important;
-    border: black !important;
-}
-
-.btn-personalizado:hover{
-    /* background-color: #B1C9EF !important; */
-    background-color: #D5DEEF !important;
+    background: linear-gradient(to right, #395886, #586d8c);
 }
 
 @media (max-width: 768px) {
@@ -98,6 +65,18 @@ body {
     }
 }
 
+/* Estilos de botones. */
+.btn-personalizado{
+    /* background-color: #B1C9EF !important; */
+    background-color: #8AAEE0 !important;
+    border: black !important;
+}
+
+.btn-personalizado:hover{
+    /* background-color: #B1C9EF !important; */
+    background-color: #D5DEEF !important;
+}
+
 .btn-custom{
     background-color: #8AAEE0 !important;
     border: white !important;
@@ -115,10 +94,7 @@ body {
     background-color: #D5DEEF !important;
 }
 
-.profile-image {
-    width: 150px;
-    height: auto;
-    border-radius: 50%;
-    border: 2px solid black;
-    object-fit: cover;
+/* Otros estilos. */
+.color-text{
+    color: white !important;
 }

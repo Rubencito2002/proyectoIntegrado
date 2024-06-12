@@ -1,0 +1,12 @@
+/* Estilos específicos para el footer */
+.footer {
+    width: 100%;
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 1000; /* Asegura que el footer esté encima del contenido */
+    display: none; /* Oculta el footer por defecto */
+    color: black;
+}
