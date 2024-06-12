@@ -185,7 +185,13 @@ document.addEventListener('DOMContentLoaded', function(){
                     },
                     body: JSON.stringify({ carrito: carrito, usuario: usuarioActual, datosEnvio: datosEnvio, formaPago: formaPago})
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (response.redirected) {
+                        mostrarFeedbackLogin();
+                    } else {
+                        response.json()
+                    }
+                })
                 .then(data => {
                     console.log(data);
                     if(data.success){
@@ -331,6 +337,15 @@ document.addEventListener('DOMContentLoaded', function(){
         setTimeout(function() {
             feedback.style.display = "none"; // Ocultar el feedback después de unos segundos
             window.location.href = '/'; // Redirigir a la página principal
+        }, 3000); // Cambia este valor para ajustar la duración del feedback
+    }
+
+    function mostrarFeedbackLogin() {
+        var feedback = document.getElementById("login-message");
+        feedback.style.display = "block";
+        setTimeout(function() {
+            feedback.style.display = "none"; // Ocultar el feedback después de unos segundos
+            window.location.href = '/usuarios/login/';
         }, 3000); // Cambia este valor para ajustar la duración del feedback
     }
 

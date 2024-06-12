@@ -118,7 +118,7 @@
     border-radius: 50%; /* Forma circular para el contador */
 }
 
-.feedback-message-add, .feedback-message-delete, .confirmation-message {
+.feedback-message-add, .feedback-message-delete, .confirmation-message, .login-message{
     position: fixed;
     top: 20px;
     right: 20px;
