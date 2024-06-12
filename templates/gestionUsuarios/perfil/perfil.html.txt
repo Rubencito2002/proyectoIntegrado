@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} Perfil de Usuario {% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Perfil de Usuario</h2>
+        {% if empleado %}
+            <h3>Información de Empleado</h3>
+            <p><strong>Nombre de Usuario:</strong> {{ request.user.username }}</p>
+            <p><strong>Nombre Completo:</strong> {{ request.user.get_full_name }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Cargo:</strong> {{ empleado.cargo }}</p>
+            <p><strong>Salario:</strong> {{ empleado.cargo.salario }}</p>
+            <h3>Pedidos Realizados</h3>
+            <!-- <ul>
+                {% for pedido in pedidos %}
+                    <li>{{ pedido.detalle }} - {{ pedido.fecha }}</li>
+                {% endfor %}
+            </ul> -->
+        {% elif cliente %}
+            <h3>Información de Cliente</h3>
+            <p><strong>Nombre de Usuario:</strong> {{ request.user.username }}</p>
+            <p><strong>Nombre Completo:</strong> {{ request.user.get_full_name }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Dirección:</strong> {{ cliente.direccion }}</p>
+            <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+            <h3>Compras Realizadas</h3>
+            <ul>
+                {% for compra in compras %}
+                    <li>{{ compra.detalle }} - {{ compra.fecha }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Valoraciones Realizadas</h3>
+            <ul>
+                {% for valoracion in valoraciones %}
+                    <li>{{ valoracion.detalle }} - {{ valoracion.fecha }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No se encontró información adicional para este usuario.</p>
+        {% endif %}
+    </div>
+{% endblock %}

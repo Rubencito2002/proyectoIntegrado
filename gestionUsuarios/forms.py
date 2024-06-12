@@ -34,18 +34,17 @@ class CustomUserCreationForm(UserCreationForm):
                 Cliente.objects.create(user=user, dni=self.cleaned_data.get('dni'), direccion=self.cleaned_data.get('direccion'), telefono=self.cleaned_data.get('telefono'), tipo_pago=self.cleaned_data.get('tipo_pago'))
         return user
 
-# class EmployeeCreationForm(CustomUserCreationForm):
-#     def save(self, commit=True):
-#         user = super().save(commit=False)
-#         user.is_employee = True
-#         if commit:
-#             user.save()
-#         return user
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
 
-# class CustomerCreationForm(CustomUserCreationForm):
-#     def save(self, commit=True):
-#         user = super().save(commit=False)
-#         user.is_customer = True
-#         if commit:
-#             user.save()
-#         return user
+class EmpleadoForm(forms.ModelForm):
+    class Meta:
+        model = Empleado
+        fields = ['cargo', 'profile_image']
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ['direccion', 'telefono', 'profile_image']

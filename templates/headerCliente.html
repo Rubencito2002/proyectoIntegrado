@@ -51,7 +51,7 @@
                         <i class="bi bi-person-circle"> {{ user.username }}</i>
                     </button>
                     <ul class="dropdown-menu">
-                        <div><a class="dropdown-item" href="#">Perfil</a></div>
+                        <div><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></div>
                         <hr>
                         <div><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></div>
                     </ul>

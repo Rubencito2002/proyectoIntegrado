@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h3 class="display-4">Editar Perfil</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-personalizado color-text">Guardar Cambios</button>
+        </form>
+    </div>
+{% endblock %}

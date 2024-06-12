@@ -114,3 +114,11 @@ body {
 .btn-custom:hover{
     background-color: #D5DEEF !important;
 }
+
+.profile-image {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid black;
+    object-fit: cover;
+}

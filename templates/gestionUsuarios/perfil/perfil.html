@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %} Perfil de Usuario {% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            {% if empleado %}
+                <div class="col-8">
+                    <h3 class="display-4 ">Información de Empleado</h3>
+
+                    {% if empleado.profile_image %}
+						<img src="{{ empleado.profile_image.url }}" class="profile-image" alt="">
+					{% endif %}
+
+                    <br><br>
+
+                    <p class="lead">Nombre de Usuario: {{ request.user.username }}</p>
+                    <p class="lead">Nombre Completo:</strong> {{ request.user.get_full_name }}</p>
+                    <p class="lead">Email:</strong> {{ request.user.email }}</p>
+                    <p class="lead">Cargo:</strong> {{ empleado.cargo }}</p>
+                    <p class="lead">Salario:</strong> {{ empleado.cargo.salario }} €</p>
+
+                    <a href="{% url 'update_password' %}" class="btn btn-personalizado color-text"><i class="bi bi-pencil"> Cambiar Contraseña</i></a>
+                    <a href="{% url 'editar_perfil_empleado' %}" class="btn btn-personalizado color-text""><i class="bi bi-gear"> Modificar Datos</i></a>
+                    <a href="{% url 'eliminar' pk=request.user.id %}" class="btn btn-personalizado color-text""><i class="bi bi-ban"> Eliminar</i></a>
+                    <a href="{% url 'listProducts' %}" class="btn btn-personalizado color-text""><i class="bi bi-arrow-return-left"> Volver</i></a>
+                </div>
+                <div class="col-4">
+                    <h3 class="text-decoration-underline mt-4">Pedidos Realizados</h3>
+                    <ul class="list-group">
+                        {% for pedido in pedidos %}
+                            <li class="list-group-item">{{ pedido.detalle }} - {{ pedido.fecha }}</li>
+                        {% empty %}
+                            <li class="list-group-item">No se encontraron pedidos.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% elif cliente %}
+                <div class="col-8">
+                    <h3 class="display-4 ">Información de Cliente</h3>
+
+                    {% if cliente.profile_image %}
+						<img src="{{ cliente.profile_image.url }}" class="profile-image" alt="">
+					{% endif %}
+
+                    <br><br>
+
+                    <p class="lead">Nombre de Usuario:</strong> {{ request.user.username }}</p>
+                    <p class="lead">Nombre Completo:</strong> {{ request.user.get_full_name }}</p>
+                    <p class="lead">Email:</strong> {{ request.user.email }}</p>
+                    <p class="lead">Dirección:</strong> {{ cliente.direccion }}</p>
+                    <p class="lead">Teléfono:</strong> {{ cliente.telefono }}</p>
+                    <p class="lead">Tipo de Pago:</strong> {{ cliente.tipo_pago }}</p>
+
+                    <a href="{% url 'update_password' %}" class="btn btn-personalizado color-text"><i class="bi bi-pencil"> Cambiar Contraseña</i></a>
+                    <a href="{% url 'editar_perfil_cliente' %}" class="btn btn-personalizado color-text""><i class="bi bi-gear"> Modificar Datos</i></a>
+                    <a href="{% url 'eliminar' pk=request.user.id %}" class="btn btn-personalizado color-text""><i class="bi bi-ban"> Eliminar</i></a>
+                    <a href="{% url 'listProducts' %}" class="btn btn-personalizado color-text""><i class="bi bi-arrow-return-left"> Volver</i></a>
+                </div>
+                <div class="col-4">
+                    <h3 class="text-decoration-underline mt-4">Compras Realizadas</h3>
+                    <ul class="list-group">
+                        {% for compra in compras %}
+                            <li class="list-group-item">{{ compra.detalle }} - {{ compra.fecha }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h3 class="text-decoration-underline mt-4">Valoraciones Realizadas</h3>
+                    <ul class="list-group">
+                        {% for valoracion in valoraciones %}
+                            <li class="list-group-item">{{ valoracion.detalle }} - {{ valoracion.fecha }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <p>No se encontró información adicional para este usuario.</p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
