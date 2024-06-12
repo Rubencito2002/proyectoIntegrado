@@ -11,7 +11,7 @@ def administrador_sistema(view_func):
             return view_func(request, *args, **kwargs)
         else:
             # Si no es un empleado con el cargo, redirigir a la pagina de login
-            return redirect('inicio_sesion')
+            return redirect('login')
     return _wrapped_view
 
 def gerente_compras(view_func):
@@ -23,7 +23,7 @@ def gerente_compras(view_func):
             return view_func(request, *args, **kwargs)
         else:
             # Si no es un empleado con el cargo, redirigir a la pagina de login
-            return redirect('inicio_sesion')
+            return redirect('login')
     return _wrapped_view
 
 def analista_datos(view_func):
@@ -35,5 +35,5 @@ def analista_datos(view_func):
             return view_func(request, *args, **kwargs)
         else:
             # Si no es un empleado con el cargo, redirigir a la pagina de login
-            return redirect('inicio_sesion')
+            return redirect('login')
     return _wrapped_view
