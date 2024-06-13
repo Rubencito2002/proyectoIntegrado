@@ -85,6 +85,7 @@ class Perfil(DetailView):
             context['cliente'] = user.cliente
             context['compras'] = OrdenCompraProducto.objects.filter(usuario=user)
             context['valoraciones'] = Valoracion.objects.filter(usuario=user)
+            context['favorito'] = Favorito.objects.filter(usuario=user)
 
         return context
     

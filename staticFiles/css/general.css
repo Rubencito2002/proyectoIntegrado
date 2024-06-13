@@ -98,3 +98,10 @@ body {
 .color-text{
     color: white !important;
 }
+
+.list-custom{
+    position: relative !important;
+    display: block !important;
+    text-decoration: none !important;
+    background-color: rgba(255, 255, 255, 0.815) !important;
+}

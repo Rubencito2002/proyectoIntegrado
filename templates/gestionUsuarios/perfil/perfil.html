@@ -15,11 +15,13 @@
 
                     <br><br>
 
-                    <p class="lead">Nombre de Usuario: {{ request.user.username }}</p>
-                    <p class="lead">Nombre Completo:</strong> {{ request.user.get_full_name }}</p>
-                    <p class="lead">Email:</strong> {{ request.user.email }}</p>
-                    <p class="lead">Cargo:</strong> {{ empleado.cargo }}</p>
-                    <p class="lead">Salario:</strong> {{ empleado.cargo.salario }} €</p>
+                    <ul class="list-group">
+                        <li class="list-group-item list-custom">Nombre de Usuario: {{ request.user.username }}</li>
+                        <li class="list-group-item list-custom">Nombre Completo: {{ request.user.get_full_name }}</li>
+                        <li class="list-group-item list-custom">Email: {{ request.user.email }}</li>
+                        <li class="list-group-item list-custom">Cargo: {{ empleado.cargo }}</li>
+                        <li class="list-group-item list-custom">Salario: {{ empleado.cargo.salario }} €</li>
+                    </ul>
 
                     <a href="{% url 'update_password' %}" class="btn btn-personalizado color-text"><i class="bi bi-pencil"> Cambiar Contraseña</i></a>
                     <a href="{% url 'editar_perfil_empleado' %}" class="btn btn-personalizado color-text""><i class="bi bi-gear"> Modificar Datos</i></a>
@@ -30,9 +32,9 @@
                     <h3 class="text-decoration-underline mt-4">Pedidos Realizados</h3>
                     <ul class="list-group">
                         {% for pedido in pedidos %}
-                            <li class="list-group-item">{{ pedido.detalle }} - {{ pedido.fecha }}</li>
+                            <li class="list-group-item list-custom">{{ pedido.detalle }} - {{ pedido.fecha }}</li>
                         {% empty %}
-                            <li class="list-group-item">No se encontraron pedidos.</li>
+                            <li class="list-group-item list-custom">No se encontraron pedidos.</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -45,13 +47,15 @@
 					{% endif %}
 
                     <br><br>
-
-                    <p class="lead">Nombre de Usuario:</strong> {{ request.user.username }}</p>
-                    <p class="lead">Nombre Completo:</strong> {{ request.user.get_full_name }}</p>
-                    <p class="lead">Email:</strong> {{ request.user.email }}</p>
-                    <p class="lead">Dirección:</strong> {{ cliente.direccion }}</p>
-                    <p class="lead">Teléfono:</strong> {{ cliente.telefono }}</p>
-                    <p class="lead">Tipo de Pago:</strong> {{ cliente.tipo_pago }}</p>
+                    
+                    <ul class="list-group">
+                        <li class="list-group-item list-custom">Nombre de Usuario: {{ request.user.username }}</li>
+                        <li class="list-group-item list-custom">Nombre Completo: {{ request.user.get_full_name }}</li>
+                        <li class="list-group-item list-custom">Email: {{ request.user.email }}</li>
+                        <li class="list-group-item list-custom">Dirección: {{ cliente.direccion }}</li>
+                        <li class="list-group-item list-custom">Teléfono: {{ cliente.telefono }}</li>
+                        <li class="list-group-item list-custom">Tipo de Pago: {{ cliente.tipo_pago }}</li>
+                    </ul>
 
                     <a href="{% url 'update_password' %}" class="btn btn-personalizado color-text"><i class="bi bi-pencil"> Cambiar Contraseña</i></a>
                     <a href="{% url 'editar_perfil_cliente' %}" class="btn btn-personalizado color-text""><i class="bi bi-gear"> Modificar Datos</i></a>
@@ -62,13 +66,19 @@
                     <h3 class="text-decoration-underline mt-4">Compras Realizadas</h3>
                     <ul class="list-group">
                         {% for compra in compras %}
-                            <li class="list-group-item">{{ compra.detalle }} - {{ compra.fecha }}</li>
+                            <li class="list-group-item list-custom">{{ compra.producto.nombre }} - {{ compra.fecha }}</li>
                         {% endfor %}
                     </ul>
                     <h3 class="text-decoration-underline mt-4">Valoraciones Realizadas</h3>
                     <ul class="list-group">
                         {% for valoracion in valoraciones %}
-                            <li class="list-group-item">{{ valoracion.detalle }} - {{ valoracion.fecha }}</li>
+                            <li class="list-group-item list-custom">{{ valoracion.detalle }} - {{ valoracion.fecha }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h3 class="text-decoration-underline mt-4">Productos Favorito</h3>
+                    <ul class="list-group">
+                        {% for fav in favorito %}
+                            <li class="list-group-item list-custom">{{ fav.producto.nombre }}</li>
                         {% endfor %}
                     </ul>
                 </div>
