@@ -13,6 +13,7 @@ urlpatterns = [
     path('listSupermercado/', ListProductsSuperMarket.as_view(), name='listSuperMarket'),
     path('listInformatica/', ListProductsInformatica.as_view(), name='listInformatica'),
     path('listModa/', ListProductsModa.as_view(), name='listModa'),
+    path('favoritos/<int:producto_id>/', AñadirFavorito.as_view(), name='añadirFavorito'),
 
     # Compra de Producto.
     path('procesarCompra/', views.procesarCompra, name='procesarCompra'),

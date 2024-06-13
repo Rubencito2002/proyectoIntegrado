@@ -1,20 +1,15 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 from almacenApp.models import *
+from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
-
-# Create your views here.
-
-# # Vista de página principal de la tienda.
-# def welcome(request):
-#     return render(request, 'tiendaApp/index.html')
 
 # Vista para mostrar todos los productos sin filtrar.
 class ListProducts(ListView):
@@ -151,19 +146,14 @@ class DetailsProducts(DetailView):
         context = super().get_context_data(**kwargs)
         producto = self.get_object()
         context['valoraciones'] = Valoracion.objects.filter(producto=producto)
+
+        # 
+        if self.request.user.is_authenticated:
+            context['es_favorito'] = Favorito.objects.filter(usuario=self.request.user, producto=producto).exists()
+        else:
+            context['es_favorito'] = False
+
         return context
-
-# Vista para la realizacion de la toma de los datos de envios.
-# def datosEnvio(request):
-#     total = request.GET.get('total', 0)
-#     carrito = request.POST.get('carrito', [])
-#     return render(request, 'tiendaApp/compras/datosEnvio.html', {'carrito': carrito, 'total': total})
-
-# # Vista para la realizacion de la toma de los datos de forma de pago.
-# def formaPago(request):
-#     total = request.GET.get('total', 0)
-#     carrito = request.POST.get('carrito', [])
-#     return render(request, 'tiendaApp/compras/formaPago.html', {'carrito': carrito, 'total': total})
 
 # Vista para la confirmacion de la compra de los productos.
 def confirmarCompra(request):
@@ -273,3 +263,26 @@ class UpdateValoracion(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('details_productsComprar', kwargs={'pk': self.object.pk})
+    
+# Vista para añadir los productos favoritos.
+# def añadirFavorito(request, producto_id):
+#     producto = get_object_or_404(Producto, id=producto_id)
+#     favorito, created = Favorito.objects.get_or_create(usuario=request.user, producto=producto)
+
+#     if not created:
+#         favorito.delete()
+
+#     return redirect('details_productsComprar', producto_id=producto.id)
+
+class AñadirFavorito(View):
+    def post(self, request, producto_id):
+        producto = get_object_or_404(Producto, id=producto_id)
+        favorito, created = Favorito.objects.get_or_create(usuario=request.user, producto=producto)
+        
+        if not created:
+            favorito.delete()
+            es_favorito = False
+        else:
+            es_favorito = True
+
+        return JsonResponse({'favorito': es_favorito})

@@ -14,7 +14,13 @@
                 <span class="m-3"> {{ producto.precio }} €</span>
                 <div>
                     <button class="addCart btn btn-personalizado color-text mr-2" data-name="{{ producto.nombre }}" data-price="{{ producto.precio }}">Añadir</button>
-                    <button class="btn btn-personalizado color-text">Favorito</button>
+                    <a id="favorito" href="{% url 'añadirFavorito' producto.id %}" class="btn btn-personalizado color-text" data-authenticated="{{ user.is_authenticated }}">
+                        {% if user.is_authenticated and es_favorito %}
+                            <i class="fas fa-heart" style="color: red;"></i>
+                        {% else %}
+                            <i class="fas fa-heart"></i>
+                        {% endif %}
+                    </a>
                 </div>
             </div>
         </div>

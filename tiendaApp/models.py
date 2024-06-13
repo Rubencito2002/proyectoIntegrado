@@ -69,3 +69,13 @@ class Valoracion(models.Model):
 
     def __str__(self):
         return f"{self.usuario.username} - {self.producto.nombre} - {self.valoracion} estrellas"
+    
+class Favorito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('usuario', 'producto')
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.producto.nombre}'
