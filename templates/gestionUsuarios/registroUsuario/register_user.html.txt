@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %} Registro de Usuarios {% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-center">Registro de Usuario</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Nombre de usuario:</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email">Correo electrónico:</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_first_name">Nombre:</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_last_name">Apellido:</label>
+                        {{ form.last_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password1">Contraseña:</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password2">Confirmar contraseña:</label>
+                        {{ form.password2 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_user_type">Tipo de usuario:</label>
+                        {{ form.user_type }}
+                    </div>
+                    <br>
+                    <div id="empleado_fields" style="display: none;">
+                        <h4>Información del Empleado</h4>
+                        <div class="form-group">
+                            <label for="id_dni">DNI:</label>
+                            {{ form.dni }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_direccion">Dirección:</label>
+                            {{ form.direccion }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_telefono">Teléfono:</label>
+                            {{ form.telefono }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_cargo">Cargo:</label>
+                            {{ form.cargo }}
+                        </div>
+                    </div>
+                    <div id="cliente_fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="id_tipo_pago">Tipo de pago:</label>
+                            {{ form.tipo_pago }}
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-personalizado color-text">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const user_type = document.getElementById('id_user_type');
+            const empleado_fields = document.getElementById('empleado_fields');
+            const cliente_fields = document.getElementById('cliente_fields');
+        
+            function toggleFields() {
+                if (user_type.value === 'empleado') {
+                    empleado_fields.style.display = 'block';
+                    cliente_fields.style.display = 'none';
+                } else if (user_type.value === 'cliente') {
+                    empleado_fields.style.display = 'none';
+                    cliente_fields.style.display = 'block';
+                } else {
+                    empleado_fields.style.display = 'none';
+                    cliente_fields.style.display = 'none';
+                }
+            }
+        
+            user_type.addEventListener('change', toggleFields);
+            toggleFields(); // Llamar a la función inicialmente para mostrar los campos adecuados según el valor actual del selector
+        });
+    </script>
+{% endblock %}

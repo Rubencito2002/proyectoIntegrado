@@ -11,13 +11,14 @@ class CustomUserCreationForm(UserCreationForm):
     direccion = forms.CharField(max_length=255, required=False)
     telefono = forms.CharField(max_length=20, required=False)
     cargo = forms.ModelChoiceField(queryset=Cargo.objects.all(), required=False)
+    profile_image = forms.ImageField(required=False)
 
     # Campos adicionales para cliente
     tipo_pago = forms.CharField(max_length=20, required=False)
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'user_type', 'dni', 'direccion', 'telefono', 'cargo', 'tipo_pago')
+        fields = ('username', 'email', 'first_name', 'last_name', 'user_type', 'dni', 'direccion', 'telefono', 'cargo', 'tipo_pago', 'profile_image')
 
     # Sobreescribir el método save para marcar el tipo de usuario
     def save(self, commit=True):
@@ -28,10 +29,10 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
             if user.is_empleado:
                 # Guardar datos adicionales de empleado
-                Empleado.objects.create(user=user, dni=self.cleaned_data.get('dni'), direccion=self.cleaned_data.get('direccion'), telefono=self.cleaned_data.get('telefono'), salario=self.cleaned_data.get('salario'), cargo=self.cleaned_data.get('cargo'))
+                Empleado.objects.create(user=user, dni=self.cleaned_data.get('dni'), direccion=self.cleaned_data.get('direccion'), telefono=self.cleaned_data.get('telefono'), salario=self.cleaned_data.get('salario'), cargo=self.cleaned_data.get('cargo'), profile_image=self.cleaned_data.get('profile_image'))
             elif user.is_cliente:
                 # Guardar datos adicionales de cliente
-                Cliente.objects.create(user=user, dni=self.cleaned_data.get('dni'), direccion=self.cleaned_data.get('direccion'), telefono=self.cleaned_data.get('telefono'), tipo_pago=self.cleaned_data.get('tipo_pago'))
+                Cliente.objects.create(user=user, dni=self.cleaned_data.get('dni'), direccion=self.cleaned_data.get('direccion'), telefono=self.cleaned_data.get('telefono'), tipo_pago=self.cleaned_data.get('tipo_pago'), profile_image=self.cleaned_data.get('profile_image'))
         return user
 
 class UserForm(forms.ModelForm):

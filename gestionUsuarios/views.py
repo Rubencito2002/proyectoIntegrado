@@ -18,20 +18,23 @@ def register_user(request):
             user.is_empleado = form.cleaned_data.get('user_type') == 'empleado'
             user.is_cliente = form.cleaned_data.get('user_type') == 'cliente'
             user.save()
+
+            avatar = form.cleaned_data.get('profile_image')
+
             if user.is_empleado:
                 # Guardar datos adicionales de empleado
                 dni = form.cleaned_data.get('dni')
                 direccion = form.cleaned_data.get('direccion')
                 telefono = form.cleaned_data.get('telefono')
                 cargo = form.cleaned_data.get('cargo')
-                Empleado.objects.create(user=user, dni=dni, direccion=direccion, telefono=telefono, cargo=cargo)
+                Empleado.objects.create(user=user, dni=dni, direccion=direccion, telefono=telefono, cargo=cargo, profile_image=avatar)
             elif user.is_cliente:
                 # Guardar datos adicionales de cliente
                 dni = form.cleaned_data.get('dni')
                 direccion = form.cleaned_data.get('direccion')
                 telefono = form.cleaned_data.get('telefono')
                 tipo_pago = form.cleaned_data.get('tipo_pago')
-                Cliente.objects.create(user=user, dni=dni, direccion=direccion, telefono=telefono, tipo_pago=tipo_pago)
+                Cliente.objects.create(user=user, dni=dni, direccion=direccion, telefono=telefono, tipo_pago=tipo_pago, profile_image=avatar)
             login(request, user)
             return redirect('success')
     else:

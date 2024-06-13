@@ -1,34 +1,35 @@
 {% extends 'base.html' %}
 {% block title %} Iniciar Sesión {% endblock %}
 {% block content %}
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h2 class="text-center">Iniciar Sesión</h2>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="username">Nombre de Usuario:</label>
-                        <input type="text" name="username" id="username" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" name="password" id="password" class="form-control" required>
-                    </div>
-                    {% if error %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ error }}
-                        </div>
-                    {% endif %}
-                    <button type="submit" class="btn btn-personalizado color-text">Iniciar Sesión</button>
-                </form>
-                <div class="text-center mt-3">
-                    <p style="color: black;">
-                        ¿No tienes una cuenta? 
-                        <a href="{% url 'register_user' %}" class="custom-link"> Regístrate aquí.</a>
-                    </p>
+<div class="container mt-2 gradient-custom py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-white fw-bold mb-2 text-uppercase text-center">Iniciar Sesión</h2>
+            <p class="text-white mb-3 text-center">¡Por favor, introduce tu usuario y contraseña!</p>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label text-white" for="username">Nombre de Usuario:</label>
+                    <input type="text" name="username" id="username" class="form-control form-control-lg" required>
                 </div>
+                <div class="form-group">
+                    <label class="form-label text-white" for="password">Contraseña:</label>
+                    <input type="password" name="password" id="password" class="form-control form-control-lg" required>
+                </div>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <button type="submit" class="btn btn-personalizado color-text">Iniciar Sesión</button>
+            </form>
+            <div class="text-center mt-3 mb-0">
+                <p class="text-white">
+                    ¿No tienes una cuenta? 
+                    <a href="{% url 'register_user' %}" class="custom-link text-white-50 fw-bold"> Inscribirse</a>
+                </p>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
