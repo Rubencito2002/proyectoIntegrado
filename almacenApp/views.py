@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.http import JsonResponse
 from .models import *
+from tiendaApp.models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -351,4 +352,16 @@ def descargarInformeUsuario(request):
 
     return response
 
-# 
+# Vista para el listado de las ventas del comercio.
+class informeVentas(ListView):
+    model = OrdenCompraProducto
+    template_name = 'almacenApp/informes/informesVentas.html'
+    context_object_name = 'ventas'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ventas = OrdenCompraProducto.objects.all()
+        for venta in ventas:
+            venta.precio_total = venta.cantidad * venta.producto.precio
+        context['ventas'] = ventas
+        return context

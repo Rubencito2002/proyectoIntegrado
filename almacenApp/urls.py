@@ -38,4 +38,5 @@ urlpatterns = [
     path('descargarInformeProdsMasPeds/', analista_datos(descargarInformeProdsMasPeds), name='descargarInformeProdsMasPeds'),
     path('informes/usuarioActivo/', analista_datos(informeUsuarioActivo.as_view()), name='informeUsuarioActivo'),
     path('descargarInformeUsuario/', analista_datos(descargarInformeUsuario), name='descargarInformeUsuario'),
+    path('informes/ventas/', analista_datos(informeVentas.as_view()), name='informeVentas'),
 ]

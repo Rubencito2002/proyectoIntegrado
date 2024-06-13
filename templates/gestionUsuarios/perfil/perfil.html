@@ -29,14 +29,16 @@
                     <a href="{% url 'listProducts' %}" class="btn btn-personalizado color-text""><i class="bi bi-arrow-return-left"> Volver</i></a>
                 </div>
                 <div class="col-4">
-                    <h3 class="text-decoration-underline mt-4">Pedidos Realizados</h3>
-                    <ul class="list-group">
-                        {% for pedido in pedidos %}
-                            <li class="list-group-item list-custom">{{ pedido.detalle }} - {{ pedido.fecha }}</li>
-                        {% empty %}
-                            <li class="list-group-item list-custom">No se encontraron pedidos.</li>
-                        {% endfor %}
-                    </ul>
+                    {% if empleado.cargo == 'Gerente de Compras' %}
+                        <h3 class="text-decoration-underline mt-4">Pedidos Realizados</h3>
+                        <ul class="list-group">
+                            {% for pedido in pedidos %}
+                                <li class="list-group-item list-custom">{{ pedido.detalle }} - {{ pedido.fecha }}</li>
+                            {% empty %}
+                                <li class="list-group-item list-custom">No se encontraron pedidos.</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
             {% elif cliente %}
                 <div class="col-8">
