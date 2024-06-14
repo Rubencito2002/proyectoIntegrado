@@ -3,7 +3,7 @@
 # Proyecto Integral de Fin de Grado. (CFGS Desarrollo de Apliaciones Web)
 
 * Se solicita lo siguiente para la realización de este proyecto:
-**Se va realizar dos aplicaciones para la realizacion de este proyecto.**
+**Se va realizar tres aplicaciones para la realizacion de este proyecto.**
 ## Aplicación de Almacen (almacenApp):
 * **Creacción de los modelos** necesario para su alta y administracion en django admin.
 **Todos los enlances de la aplicacion por defecto estan en la ruta almacen/...**     
@@ -36,13 +36,8 @@
 * **Informes** En la ruta de informes/
     * Listado de los pedidos por su estado, por su usuarios y por su proveedor.
     * Listado de productos por los más pedidos.
-    * Listado de los usuarios más activos.
-    * ...
-* **Login**
-    * Incluye en el template base un apartado que identifique si el usuario está o no logado, dando opciones de login o logout según proceda.
-    * Crea un formulario de login que permita autenticar y logar únicamente a los usuarios (No se permite login de usuarios que no tengan relación con el modelo usuario)
-    * El login devuelve a la página desde la que se redirigió.
-    * Crear la gestion del usuario mostrando su perfil, que pueda cambiar la contraseña y sus datos del usuario, tambien que pueda eliminar su usuario.
+    * Listado de los usuarios más activos (Exclusivo como usuario con el rol de Empleado).
+    * Listado de las ventas del comercio.
 * **Control de Permisos**
     * Las secciones de admin, las creacciones del modelo, informes es sólo para usuarios tipos superuser y staff.
     * La seccion de pedidos deben estar restringidos a usuarios registrados como usuario empleados sin permisos de staff e superuser.
@@ -60,14 +55,22 @@
 * **Valoracion**. Tiene lugar en la ruta valoracion/
     * **valoracion/<int:pk>** Se realiza la creaccion de la valoracion de los productos dentro de la propia pagina de detalles del producto.
     * **ediccion** donde se podra modificar los datos de esa valoracion por si se te ha pasado algo que aporta.
-* **Login**
-    * Incluye en el template base un apartado que identifique si el usuario está o no logado, dando opciones de login o logout según proceda.
-    * Crea un formulario de login que permita autenticar y logar únicamente a los usuarios (No se permite login de usuarios que no tengan relación con el modelo usuario)
-    * El login devuelve a la página desde la que se redirigió.
-    * Crear la gestion del usuario mostrando su perfil, que pueda cambiar la contraseña y sus datos del usuario, tambien que pueda eliminar su usuario.
 * **Control de Permisos**
     * La seccion de compras deben estar restringidos a usuarios registrados como usuario clientes sin permisos de staff e superuser.
     * Las vistas de productos y detalles de productos tambien debe estar restringidos a usuarios registrados como usuario clientes sin permisos de staff e superuser.
+## Aplicación de Gestion de Usuarios (gestionUsuarios):
+**Todos los enlances de la aplicacion por defecto estan en la ruta usuarios/...**   
+* **Registro de Usuarios**. Tiene lugar en la ruta register/
+    * Donde se realizará a través de un único formulario el registro de los usuarios tanto empleados como clientes.
+    * Cuando se realiza el registro de los usuarios se nos mostrará una nueva página mostrando que el usuario se ha creado.
+* **Página de Login**. Tiene lugar en la ruta login/
+    * Donde se realizará a través de un único formulario que se le pide al usuario su nombre de usuario y contraseña para iniciar sesión
+* **Página de Cierre de Sesión**. Tiene lugar en la ruta valoracion/
+    * Donde se realizará el cierre de sesión del usuario y se pasará a la página principal.
+* **Panel de Perfil**. Tiene lugar en la ruta perfil/
+    * Donde se mostrará una página donde se muestre los datos del usuario.
+    * En este panel el usuario podrá modificar datos de su perfil como cambiar la contraseña.
+    * En este panel se mostrarán los pedidos que realiza los empleados como las compras que realiza los clientes, también para los clientes se le mostrará las valoraciones que realiza y también el listado de los productos favoritos de los clientes.
 ## Futuras Versiones:
 ### Aplicacion de Api.
     * Se ha generado una nueva aplicación llamada api para poder searializar nuestro modelo actual de nuestra aplicación.
