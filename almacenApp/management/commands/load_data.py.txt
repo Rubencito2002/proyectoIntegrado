@@ -1,0 +1,95 @@
+import requests
+from django.core.management.base import BaseCommand
+from almacenApp.models import Categoria, Marca, Producto
+from django.core.files.base import ContentFile
+
+class Command(BaseCommand):
+    help = 'Load data from multiple APIs into the database'
+
+    def handle(self, *args, **kwargs):
+        # URLs de las APIs
+        urls = {
+            'ropa_y_tecnologia': 'https://fakestoreapi.com/products',
+            'alimentacion': 'https://api.ejemplo.com/products'  # Reemplazar con la URL real de la API de alimentación
+        }
+        
+        # Definir las zonas del comercio para la primera API
+        zonas_ropa_tecnologia = {
+            'electronics': 'Informática',
+            'jewelery': 'Moda',
+            'men\'s clothing': 'Moda',
+            'women\'s clothing': 'Moda'
+        }
+
+        # Definir la zona del comercio para la segunda API
+        zona_alimentacion = 'Supermercado'
+
+        # Crear la categoría (zona) de alimentación si no existe
+        Categoria.objects.get_or_create(nombre=zona_alimentacion)
+
+        for key, url in urls.items():
+            response = requests.get(url)
+            if response.status_code == 200:
+                data = response.json()
+                
+                if key == 'ropa_y_tecnologia':
+                    self.load_ropa_tecnologia(data, zonas_ropa_tecnologia)
+                elif key == 'alimentacion':
+                    self.load_alimentacion(data, zona_alimentacion)
+            else:
+                self.stdout.write(self.style.ERROR(f'Error al obtener datos de la API {key}'))
+
+        self.stdout.write(self.style.SUCCESS('Datos cargados exitosamente'))
+
+    def load_ropa_tecnologia(self, data, zonas):
+        for item in data:
+            marca_name = item.get('category', 'Unknown')
+            marca, _ = Marca.objects.get_or_create(nombre=marca_name.strip())
+
+            zona_name = zonas.get(marca_name, 'Zona General')
+            categoria, _ = Categoria.objects.get_or_create(nombre=zona_name)
+
+            producto, created = Producto.objects.get_or_create(
+                nombre=item['title'],
+                descripcion=item.get('description', ''),
+                precio=item.get('price', 0),
+                estado='disponible',
+                cantidad=item.get('stock', 100),
+                marca=marca,
+            )
+
+            image_url = item.get('image')
+            if image_url:
+                image_response = requests.get(image_url)
+                if image_response.status_code == 200:
+                    img_temp = ContentFile(image_response.content)
+                    producto.muestra.save(f"{producto.nombre}.jpg", img_temp, save=False)
+
+            producto.categoria.add(categoria)
+            producto.save()
+
+    def load_alimentacion(self, data, zona_name):
+        categoria, _ = Categoria.objects.get_or_create(nombre=zona_name)
+        
+        for item in data:
+            marca_name = item.get('brand', 'Unknown')  # Suponiendo que la API de alimentación tiene un campo 'brand'
+            marca, _ = Marca.objects.get_or_create(nombre=marca_name.strip())
+
+            producto, created = Producto.objects.get_or_create(
+                nombre=item['name'],  # Suponiendo que la API de alimentación tiene un campo 'name'
+                descripcion=item.get('description', ''),
+                precio=item.get('price', 0),
+                estado='disponible',
+                cantidad=item.get('stock', 100),
+                marca=marca,
+            )
+
+            image_url = item.get('image')
+            if image_url:
+                image_response = requests.get(image_url)
+                if image_response.status_code == 200:
+                    img_temp = ContentFile(image_response.content)
+                    producto.muestra.save(f"{producto.nombre}.jpg", img_temp, save=False)
+
+            producto.categoria.add(categoria)
+            producto.save()

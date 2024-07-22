@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %} Hnos. Machado {% endblock %}
+{% block content %}
+	<div id="feedback-message-add" class="feedback-message-add">
+		Producto agregado al carrito
+	</div>
+
+	<div id="feedback-message-delete" class="feedback-message-delete">
+		Producto eliminado del carrito
+	</div>
+
+	<!-- Campo de búsqueda -->
+	<input type="text" id="search-query" placeholder="Buscar productos...">
+
+	<!-- Boton del Panel de Filtrado -->
+	<button class="btn btn-personalizado color-text mb-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtroPanel" aria-controls="filtroPanel">
+		<i class="bi bi-filter"></i> Filtrado
+	</button>
+
+	<div class="container-fluid offcanvas-content">
+		<div class="row">
+			<div class="col-12">
+				<!-- Panel Central con el listado de productos -->
+				<div class="row row-cols-1 row-cols-md-5 g-2" id="product-list">
+					{% include 'tiendaApp/productos/partials/product_list.html' %}
+				</div>
+			</div>
+
+			<!-- Panel de Filtrado -->
+			<div class="offcanvas offcanvas-start" tabindex="-1" id="filtroPanel" aria-labelledby="filtroPanelLabel">
+				<div class="offcanvas-header">
+					<h5 class="offcanvas-title" id="filtroPanelLabel">Panel de Filtrado</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+				</div>
+				<div class="offcanvas-body">
+					<form method="get" action="{% url 'listProducts' %}" class="mb-3">
+						{% csrf_token %}
+						<div class="input-group mb-3">
+							{{ filter_form }}
+						</div>
+						<div class="mb-1">
+							<button type="submit" class="btn btn-personalizado color-text"><i class="bi bi-filter"> Filtrar</i></button>
+						</div>
+						<div class="mb-3">
+							<a href="{% url 'listProducts' %}" class="btn btn-personalizado color-text">Borrar Filtros</a>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- Paginación -->
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					{% if page_obj.has_previous %}
+						<li class="page-item">
+							<a class="page-link btn btn-personalizado color-text" href="?page=1" aria-label="First">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link btn btn-personalizado color-text" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+								<span aria-hidden="true">&lsaquo;</span>
+							</a>
+						</li>
+					{% endif %}
+				
+					{% for num in page_obj.paginator.page_range %}
+						{% if page_obj.number == num %}
+							<li class="page-item active"><span class="page-link btn btn-personalizado color-text">{{ num }}</span></li>
+						{% else %}
+							<li class="page-item"><a class="page-link btn btn-personalizado color-text" href="?page={{ num }}">{{ num }}</a></li>
+						{% endif %}
+					{% endfor %}
+				
+					{% if page_obj.has_next %}
+						<li class="page-item">
+							<a class="page-link btn btn-personalizado color-text" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+								<span aria-hidden="true">&rsaquo;</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link btn btn-personalizado color-text" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+{% endblock %}

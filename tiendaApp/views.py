@@ -9,6 +9,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 import json
 
 # Vista para mostrar todos los productos sin filtrar.
@@ -49,6 +50,17 @@ class ListProducts(ListView):
                 queryset = queryset.filter(precio__lte=precio_max)
 
         return queryset
+    
+def search_products(request):
+    query = request.GET.get('query', '')
+    if query:
+        productos = Producto.objects.filter(nombre__icontains=query)
+    else:
+        productos = Producto.objects.all()
+    
+    return JsonResponse({
+        'html': render_to_string('tiendaApp/productos/partials/product_list.html', {'productos': productos})
+    })
 
 # Vista de los productos de la categoria supermercado.
 class ListProductsSuperMarket(ListView):

@@ -14,6 +14,7 @@ urlpatterns = [
     path('listInformatica/', ListProductsInformatica.as_view(), name='listInformatica'),
     path('listModa/', ListProductsModa.as_view(), name='listModa'),
     path('favoritos/<int:producto_id>/', AñadirFavorito.as_view(), name='añadirFavorito'),
+    path('search/', search_products, name='search_products'),
 
     # Compra de Producto.
     path('procesarCompra/', views.procesarCompra, name='procesarCompra'),

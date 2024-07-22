@@ -3,10 +3,12 @@
 body {
     font-family: "Montserrat", sans-serif !important;
     /* background-color: #638ECB !important; */
-    background-image: url(../img/background.png) !important;
-    background-size: cover; /* Esto hará que la imagen se ajuste para cubrir todo el área del contenedor */
-    background-repeat: no-repeat; /* Esto evitará que la imagen se repita */
-    background-attachment: fixed;
+    /* background-image: url(../img/background.png) !important; */
+    /* background-size: cover; Esto hará que la imagen se ajuste para cubrir todo el área del contenedor */
+    /* background-repeat: no-repeat; Esto evitará que la imagen se repita */
+    /* background-attachment: fixed; */
+    background: rgb(53,80,112);
+    background: linear-gradient(120deg, rgba(53,80,112,1) 0%, rgba(109,89,122,1) 16%, rgba(181,101,118,1) 32%, rgba(229,107,111,1) 50%, rgba(232,140,125,1) 68%, rgba(234,172,139,1) 100%);
     padding-bottom: 60px;
     display: flex;
     flex-direction: column;
@@ -20,7 +22,10 @@ body {
 
 /* Estilos de las cartas. */
 .card-personalizado{
-    /* background-color: rgba(255, 255, 255, 0.834) !important;  */
+    /* background-color: rgba(255, 255, 255, 0.834) !important; */
+    background-color: rgba(255, 255, 255, 0.39) !important;
+    /* background-color: rgb(255, 255, 255) !important;
+    opacity: .5; */
     border: none !important;
     max-width: 20rem;
 }
@@ -31,7 +36,7 @@ body {
 
 /* Estilos de Encanbezado. */
 .bg-personalizado{
-    background: linear-gradient(to right, #395886, #586d8c);
+    background: linear-gradient(to right, #B56576, #E56B6F);
 }
 
 @media (max-width: 768px) {
@@ -68,30 +73,33 @@ body {
 /* Estilos de botones. */
 .btn-personalizado{
     /* background-color: #B1C9EF !important; */
-    background-color: #8AAEE0 !important;
+    background-color: #355070 !important;
     border: black !important;
 }
 
 .btn-personalizado:hover{
     /* background-color: #B1C9EF !important; */
-    background-color: #D5DEEF !important;
+    /* background-color: #D5DEEF !important; */
+    background-color: #6D597A !important;
 }
 
 .btn-custom{
-    background-color: #8AAEE0 !important;
-    border: white !important;
+    /* background-color: #8AAEE0 !important; */
+    background-color: #355070 !important;
+    border: black !important;
     right: 15px !important;
     bottom: 15px !important;
     z-index: 99999 !important;
     width: 40px !important;
     height: 40px !important;
-    border-radius: 4px !important;
+    border-radius: 20px !important;
     position: fixed !important;
     color: white !important;
 }
 
 .btn-custom:hover{
-    background-color: #D5DEEF !important;
+    /* background-color: #D5DEEF !important; */
+    background-color: #6D597A !important;
 }
 
 /* Otros estilos. */
@@ -104,4 +112,8 @@ body {
     display: block !important;
     text-decoration: none !important;
     background-color: rgba(255, 255, 255, 0.815) !important;
+}
+
+.fondoCustom{
+    background-color: rgba(255, 255, 255, 0.63) !important;
 }

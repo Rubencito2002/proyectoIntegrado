@@ -50,17 +50,6 @@
 							<input type="text" name="nombre" id="nombre" class="form-control">
 						</div>
 						<div class="mb-3">
-							<label for="categoria" class="form-label">Categoría:</label>
-							{% for categoria in categorias %}
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" name="categorias" id="categoria-{{ categoria.id }}" value="{{ categoria.id }}">
-									<label class="form-check-label" for="categoria-{{ categoria.id }}">
-										{{ categoria.nombre }}
-									</label>
-								</div>
-							{% endfor %}
-						</div>
-						<div class="mb-3">
 							<label for="precio_min" class="form-label">Precio mínimo:</label>
 							<input type="number" id="precio_min" name="precio_min" class="form-control" placeholder="Precio mínimo">
 						</div>

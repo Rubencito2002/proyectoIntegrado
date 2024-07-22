@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const headers = ['Producto', 'Precio', 'Cantidad', 'Subtotal', 'Acciones'];
         headers.forEach(headerText => {
             const headerCell = document.createElement('th');
+            headerCell.classList.add('modalCustom');
             headerCell.textContent = headerText;
             headerRow.appendChild(headerCell);
         });

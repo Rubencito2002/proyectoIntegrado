@@ -86,13 +86,24 @@ WSGI_APPLICATION = 'generalSite.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Comercio',
+#         'USER': 'admin',
+#         'PASSWORD': 'DAW2324.',
+#         'HOST': 'database-comercio.chceiw220doh.us-east-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Comercio',
         'USER': 'admin',
         'PASSWORD': 'DAW2324.',
-        'HOST': 'database-comercio.chceiw220doh.us-east-1.rds.amazonaws.com',
+        'HOST': 'proyectointegrado2324.cxq2c8cuy88u.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
