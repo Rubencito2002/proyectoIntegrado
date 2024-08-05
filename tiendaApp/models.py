@@ -79,3 +79,22 @@ class Favorito(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} - {self.producto.nombre}'
+    
+class ProgramaLealtad(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    puntos = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"Programa de Lealtad de {self.usuario.username}"
+    
+class Orden(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha = models.DateTimeField(auto_now_add=True)
+    completada = models.BooleanField(default=False)
+
+    def save(self, *args, **kwargs):
+        if self.completada:
+            puntos = int(self.total)
+            ProgramaLealtad.objects.filter(user=self.user).update(puntos=models.F('puntos') + puntos)
+        super().save(*args, **kwargs)

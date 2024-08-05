@@ -9,6 +9,8 @@ from almacenApp.models import *
 from tiendaApp.models import *
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def register_user(request):
     if request.method == 'POST':
@@ -89,7 +91,7 @@ class Perfil(DetailView):
             context['compras'] = OrdenCompraProducto.objects.filter(usuario=user)
             context['valoraciones'] = Valoracion.objects.filter(usuario=user)
             context['favorito'] = Favorito.objects.filter(usuario=user)
-
+            context['puntos'] = ProgramaLealtad.objects.filter(usuario=user)
         return context
     
 # Vista para poder cambiar la contraseña actual del usuario.
@@ -153,3 +155,15 @@ class DeleteUsuario(DeleteView):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Eliminar Usuario'  # Puedes personalizar el título según tus necesidades
         return context
+    
+
+@login_required
+def canjear_puntos(request):
+    puntos = ProgramaLealtad.objects.get(user=request.user)
+    if puntos.puntos >= 100:  # Supongamos que se necesitan 100 puntos para un descuento
+        puntos.puntos -= 100
+        puntos.save()
+        messages.success(request, "¡Has canjeado 100 puntos por un descuento!")
+    else:
+        messages.error(request, "No tienes suficientes puntos para canjear.")
+    return redirect('perfil')

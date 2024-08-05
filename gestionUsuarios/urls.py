@@ -12,4 +12,5 @@ urlpatterns = [
     path('perfil/editar/empleado/', UpdateUsuarioEmpleado.as_view(), name='editar_perfil_empleado'),
     path('perfil/editar/cliente/', UpdateUsuarioCliente.as_view(), name='editar_perfil_cliente'),
     path('delete/<int:pk>/', DeleteUsuario.as_view(), name='eliminar'),
+    path('canjear_puntos/', views.canjear_puntos, name='canjear_puntos'),
 ]
