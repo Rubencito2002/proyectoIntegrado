@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import dj_database_url
 import os
 from pathlib import Path
 # from django.urls import reverse_lazy
@@ -97,15 +97,34 @@ WSGI_APPLICATION = 'generalSite.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Comercio',
+#         'USER': 'admin',
+#         'PASSWORD': 'DAW2324.',
+#         'HOST': 'proyectointegrado2324.cxq2c8cuy88u.us-east-1.rds.amazonaws.com',
+#         'PORT': '3306',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'railway',
+#         'USER': 'root',
+#         'PASSWORD': 'mYBcyPuXppmSHfPiYYAaAcoffNRjHyGL',
+#         'HOST': 'mysql-2ncz.railway.internal',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Comercio',
-        'USER': 'admin',
-        'PASSWORD': 'DAW2324.',
-        'HOST': 'proyectointegrado2324.cxq2c8cuy88u.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='mysql://root:mYBcyPuXppmSHfPiYYAaAcoffNRjHyGL@junction.proxy.rlwy.net:50189/railway',
+        conn_max_age=600
+    )
 }
 
 # Password validation
